@@ -1,0 +1,971 @@
+{
+  "version": "NODO 09 V3",
+  "validationDate": "2026-11-11",
+  "sourceCommit": "dcb6488e4c3e0cb6d42fa08e0cbbf77cbea207c2",
+  "physics": {
+    "passed": 24,
+    "total": 24,
+    "results": [
+      {
+        "name": "A · Aceleración y sprint",
+        "passed": true,
+        "detail": "11.50 m/s"
+      },
+      {
+        "name": "A · Diagonal normalizada",
+        "passed": true,
+        "detail": "Diagonal = recta"
+      },
+      {
+        "name": "A · Frenado con inercia",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "B · Impulso y desaceleración del slide",
+        "passed": true,
+        "detail": "11.50 → 14.06 → 11.54 m/s"
+      },
+      {
+        "name": "C · Slide jump conserva impulso",
+        "passed": true,
+        "detail": "13.64 → 13.61 m/s"
+      },
+      {
+        "name": "D · Encadenamiento y velocidad acotada",
+        "passed": true,
+        "detail": "14 cadenas; 14.10 m/s"
+      },
+      {
+        "name": "E · Pared fina a velocidad elevada",
+        "passed": true,
+        "detail": "Pared de 6 cm; impacto desde 18 m/s, sin cruce"
+      },
+      {
+        "name": "E · Esquina y deslizamiento lateral",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "E · Escalones de 20 cm",
+        "passed": true,
+        "detail": "10 escalones; y=2.00 m"
+      },
+      {
+        "name": "E · Escalón excesivo bloquea",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "E · Rampa analítica, ascenso y descenso",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "E · Techo impide ponerse de pie",
+        "passed": true,
+        "detail": "Altura máxima bajo techo: 1.12 m"
+      },
+      {
+        "name": "E · Salto contra techo",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Salto · Coyote time",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Salto · Buffer antes de aterrizar",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Salto · Control aéreo sin quitar impulso longitudinal",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cámara · FOV horizontal 100°",
+        "passed": true,
+        "detail": "57.625° vertical a 19.5:9"
+      },
+      {
+        "name": "H · Física idéntica a 30 / 60 / 144 FPS",
+        "passed": true,
+        "detail": "480 pasos; posiciones coinciden a <0.0000001 m"
+      },
+      {
+        "name": "Mapa · Entrada, paso bajo y rampa central",
+        "passed": true,
+        "detail": "Paso 1.12 m → cubierta +3.20 m"
+      },
+      {
+        "name": "Mapa · Escalera del taller a pasarela",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Mapa · Rampa de terrazas y salto de plataforma",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Mapa · Cubierta del edificio de control",
+        "passed": true,
+        "detail": "+6.40 m"
+      },
+      {
+        "name": "Mapa · Interior de control de lado a lado",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Mapa · Vía rápida continua",
+        "passed": true,
+        "detail": "73.4 m recorridos"
+      }
+    ]
+  },
+  "v3": {
+    "passed": 48,
+    "total": 48,
+    "results": [
+      {
+        "name": "K-09 · 40 + 360, exactamente 400 disparos",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "K-09 · Auto recarga OFF exige entrada manual",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "K-09 · Recarga parcial conserva munición",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "K-09 · Recarga durante sprint no se interrumpe",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Armas · Cadencia independiente de 30/60/144 Hz",
+        "passed": true,
+        "detail": "29 / 29 / 29"
+      },
+      {
+        "name": "K-09 · Modo semiautomático requiere otra pulsación",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "S-07 · Siete cartuchos y reserva finita",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "S-07 · Dos cadencias con el mismo cargador",
+        "passed": true,
+        "detail": "Corredera 4, táctico 6 disparos / 3 s"
+      },
+      {
+        "name": "S-07 · Inserción progresiva e interrupción válida",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Armas · Cambio conserva munición por ranura",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Distancia horizontal 1 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Distancia horizontal 2 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Distancia horizontal 2.5 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Distancia horizontal 2.7 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Distancia horizontal 2.8 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Distancia horizontal 3 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Piso distinto queda excluido",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Pared sólida bloquea el impacto",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Un objetivo y eliminación de un golpe",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Vida · Escudo primero, sobrante a vida",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Equipos · Daño aliado desactivado",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Percepción · FOV, reconocimiento y memoria limitada",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Percepción · No ve a través del taller",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Audición · Zona aproximada, sin objetivo adquirido",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Dificultades y cinco personalidades diferenciadas",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Reaparición · 20 posiciones válidas y protección",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Reaparición · Eliminar y recuperar vida/escudo/munición",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cajas · Una recogida, límite y regeneración",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Modos · FFA, equipos y final por puntuación",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Bot · Paso bajo y rampa central",
+        "passed": true,
+        "detail": "Llegada a 3.20 m"
+      },
+      {
+        "name": "Bot · Escalera de taller",
+        "passed": true,
+        "detail": "Llegada a 3.20 m"
+      },
+      {
+        "name": "Bot · Rampa de terrazas",
+        "passed": true,
+        "detail": "Llegada a 3.20 m"
+      },
+      {
+        "name": "Bot · Cubierta de control",
+        "passed": true,
+        "detail": "Llegada a 6.40 m"
+      },
+      {
+        "name": "Bot · Salto enlazado",
+        "passed": true,
+        "detail": "Llegada a 2.40 m"
+      },
+      {
+        "name": "Bot · Giro continuo mantiene desplazamiento",
+        "passed": true,
+        "detail": "360 pasos de giro a >4 m/s"
+      },
+      {
+        "name": "Bots · Partida de 90 s con 20 soldados respeta colisiones",
+        "passed": true,
+        "detail": "{\"samples\":3225,\"violations\":0,\"maxY\":3.2,\"states\":[\"EXPLORAR\",\"INVESTIGAR\",\"FLANQUEAR\",\"COBERTURA\",\"PRESIONAR\",\"ALTURA\",\"DESPLAZAMIENTO\",\"RETIRARSE\"],\"decisions\":12024,\"los\":60766,\"shots\":1364,\"replans\":1073,\"jumps\":9,\"slides\":56}"
+      },
+      {
+        "name": "Escena · Articulaciones conectadas y dos lotes para todos",
+        "passed": true,
+        "detail": "236 piezas articuladas / 4 soldados"
+      },
+      {
+        "name": "Escena · ADS rifle sigue el eje óptico y S-07 sin geometría de mira",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Disparos · Arquitectura bloquea antes de un enemigo",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Bots · No dispara durante reconocimiento",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Cuchillo · Radio circular en diagonal",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "S-07 · Bombeo emite un evento por disparo",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Modelo · S-07 no contiene miras superiores",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Modelo · Hoja 3D hacia atrás y al lateral",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Modelo · Posturas bajas corresponden a la colisión",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Navegación · Posición elevada accesible con línea de visión",
+        "passed": true,
+        "detail": "1.4933333333333334 m"
+      },
+      {
+        "name": "Equipos · Un bot siempre pertenece al equipo rival",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "FFA · El límite cuenta bajas individuales, no colores",
+        "passed": true,
+        "detail": "OK"
+      }
+    ]
+  },
+  "hud": {
+    "date": "2026-11-11",
+    "passed": 28,
+    "total": 28,
+    "results": [
+      {
+        "name": "HUD · Abrir muestra controles reales y oculta menús",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Selección no dispara, salta ni mueve cámara",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Arrastre directo y límite seguro",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Escala centro estable, área táctil y opacidad cero",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Segundo dedo no secuestra un arrastre",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Vista previa mantiene el bloqueo de entradas",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Posición, velocidad y perspectiva congeladas",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Guardar aplica sin reinicio y persiste",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Cancelar restaura la distribución guardada",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Restaurar distribución y cancelar restauración",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "HUD · Perfiles separados y sin crecimiento DOM al reabrir",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Multitouch · Mover, mirar, disparar y saltar",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Multitouch · Control con opacidad cero sigue funcionando",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Multitouch · Arrastrar disparo y cancelar un dedo",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Controles · Sensibilidades separadas e inversión",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Pausa · Libera controles retenidos",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 HUD · Vida, escudo, puntuación y partida editables",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 HUD · Plegar conserva selección y edición",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 HUD · Editar barra vital con panel plegado",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 HUD · Reabrir mantiene perspectiva y reloj",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 Retícula · Círculo fino con diámetro real",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 HUD · Auto recarga dentro del indicador",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 UI 844×390 · Inicia sin errores",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 UI 844×390 · Tres ranuras reciben el toque real",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 UI 844×390 · Áreas seguras y perfiles",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 UI 390×844 · Inicia sin errores",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 UI 390×844 · Tres ranuras reciben el toque real",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "V3 UI 390×844 · Áreas seguras y perfiles",
+        "passed": true,
+        "detail": "OK"
+      }
+    ],
+    "measurements": {
+      "minimapMeanCPUms": 0.006000000000058208,
+      "canvasUpdates": 200,
+      "approxJSHeapBytes": 11863979,
+      "environment": "Chrome del entorno. Canvas 2D y DOM reales; eventos sintéticos. Sin renderizado 3D ni emulación móvil.",
+      "responsive": [
+        {
+          "width": 844,
+          "height": 390,
+          "mode": "landscape"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "mode": "portrait"
+        }
+      ]
+    }
+  },
+  "offlineLogic": {
+    "environment": "Node VM ejecuta el sw.js real con Cache/Fetch simulados; no prueba del ciclo Service Worker de Safari",
+    "passed": 5,
+    "total": 5,
+    "results": [
+      {
+        "name": "Precarga todos los archivos locales",
+        "passed": true
+      },
+      {
+        "name": "Navegación sin red recupera index.html",
+        "passed": true
+      },
+      {
+        "name": "Módulo sin red proviene de caché",
+        "passed": true
+      },
+      {
+        "name": "Limpieza limitada a su propio ámbito",
+        "passed": true
+      },
+      {
+        "name": "No intercepta otros orígenes",
+        "passed": true
+      }
+    ]
+  },
+  "additionalRegression": {
+    "name": "Cambio de arma tras recarga no conserva desplazamiento de mano ajeno",
+    "passed": true,
+    "environment": "Node + matrices Three.js reales"
+  },
+  "chromeLogicRepeat": {
+    "passed": 72,
+    "total": 72,
+    "scope": "Mismas 24+48 comprobaciones; no se suman otra vez al total",
+    "bot90Seconds": {
+      "samples": 3206,
+      "violations": 0,
+      "maxY": 4.32,
+      "shots": 1375,
+      "jumps": 10,
+      "slides": 57
+    }
+  },
+  "measurements": {
+    "sourceCommit": "dcb6488e4c3e0cb6d42fa08e0cbbf77cbea207c2",
+    "environment": {
+      "node": "v24.22.1",
+      "platform": "linux",
+      "arch": "x64",
+      "scope": "CPU en contenedor. Pasos físicos 120 Hz y actualización visual 60 Hz simulados; no hay GPU, audio ni DOM en este benchmark; NO SON FPS."
+    },
+    "unchanged": {
+      "physics.js": {
+        "same": true,
+        "sha256": "c6c78049f1a7113129c9260e66b332f0f89bed85f0a42e8e578dd01057df3d6a"
+      },
+      "level.js": {
+        "same": true,
+        "sha256": "1e67120af549f7c1b61549b3625daa3919129b4367fa48ce5439eb4310df38bd"
+      },
+      "render.js": {
+        "same": true,
+        "sha256": "86d5c61579f25913654aa2fa836fe6f5171ddc8a88e3040b137cf5ae4b79ca62"
+      },
+      "refinements.js": {
+        "same": true,
+        "sha256": "c370c8c62dfa95fa4571bfeaf95a04b10f7e5b056f9921b98f976d7a800e23b9"
+      },
+      "input.js": {
+        "same": true,
+        "sha256": "454039c8874289e62132978b999747494ddf0c7d81fae4c779cbf8426f329e77"
+      }
+    },
+    "exactPlayerTrajectorySteps": 12000,
+    "parameters": {
+      "walkSpeed": 4.2,
+      "runSpeed": 7.4,
+      "sprintSpeed": 11.5,
+      "acceleration": 46,
+      "friction": 8,
+      "jumpSpeed": 8.6,
+      "gravity": 24,
+      "slideBoost": 2.6,
+      "slideDuration": 1.25,
+      "slideDrag": 4.2,
+      "airControl": 0.34,
+      "sensitivity": 1,
+      "hFov": 100,
+      "cameraMotion": 0.65,
+      "recoil": 0.65,
+      "resolution": 1,
+      "autoResolution": true,
+      "autoSprint": false,
+      "contextualSlide": true,
+      "sound": true
+    },
+    "baselineV2": {
+      "scene": {
+        "objects": 102,
+        "meshBatches": 68,
+        "visibleBatchesNotDrawCalls": 35,
+        "allAllocatedTriangles": 5946,
+        "uniqueGeometryBytes": 120092,
+        "instanceBytes": 21984,
+        "materials": 45,
+        "articulatedObjectsOffScene": 0
+      },
+      "animationCPUms": {
+        "mean": 0.014205670512820909,
+        "p95": 0.028492999999997437,
+        "max": 0.24094299999998725
+      }
+    },
+    "samples": [
+      {
+        "bots": 1,
+        "simulatedSeconds": 35,
+        "sampledSeconds": 30,
+        "frames": 1800,
+        "initMS": 385.37356300000005,
+        "physicsPlusAICPUms": {
+          "mean": 0.022156428333336305,
+          "p95": 0.07717600000000857,
+          "max": 0.9129670000000942
+        },
+        "animationCPUms": {
+          "mean": 0.02914783499999803,
+          "p95": 0.04784199999994598,
+          "max": 0.4660430000000133
+        },
+        "combinedCPUms": {
+          "mean": 0.051304263333334335,
+          "p95": 0.11950999999999112,
+          "max": 0.9525660000000471
+        },
+        "scene": {
+          "objects": 119,
+          "meshBatches": 69,
+          "visibleBatchesNotDrawCalls": 37,
+          "allAllocatedTriangles": 7888,
+          "uniqueGeometryBytes": 138476,
+          "instanceBytes": 25252,
+          "materials": 60,
+          "articulatedObjectsOffScene": 85
+        },
+        "metrics": {
+          "decisions": 137,
+          "los": 0,
+          "shots": 0,
+          "replans": 3,
+          "jumps": 0,
+          "slides": 0
+        },
+        "eventPeak": 2,
+        "heapUsedBytesApprox": 28042608
+      },
+      {
+        "bots": 4,
+        "simulatedSeconds": 35,
+        "sampledSeconds": 30,
+        "frames": 1800,
+        "initMS": 274.237924,
+        "physicsPlusAICPUms": {
+          "mean": 0.05980208444444593,
+          "p95": 0.1734519999999975,
+          "max": 1.2182359999999335
+        },
+        "animationCPUms": {
+          "mean": 0.06304829111110924,
+          "p95": 0.1102769999999964,
+          "max": 0.3731319999999414
+        },
+        "combinedCPUms": {
+          "mean": 0.12285037555555517,
+          "p95": 0.2640480000000025,
+          "max": 1.324877000000015
+        },
+        "scene": {
+          "objects": 119,
+          "meshBatches": 69,
+          "visibleBatchesNotDrawCalls": 37,
+          "allAllocatedTriangles": 12652,
+          "uniqueGeometryBytes": 138476,
+          "instanceBytes": 38704,
+          "materials": 60,
+          "articulatedObjectsOffScene": 340
+        },
+        "metrics": {
+          "decisions": 775,
+          "los": 291,
+          "shots": 0,
+          "replans": 47,
+          "jumps": 0,
+          "slides": 1
+        },
+        "eventPeak": 5,
+        "heapUsedBytesApprox": 31893112
+      },
+      {
+        "bots": 8,
+        "simulatedSeconds": 35,
+        "sampledSeconds": 30,
+        "frames": 1800,
+        "initMS": 264.2120540000001,
+        "physicsPlusAICPUms": {
+          "mean": 0.15003633722222767,
+          "p95": 0.37944199999992634,
+          "max": 2.311153000000104
+        },
+        "animationCPUms": {
+          "mean": 0.15065250111110534,
+          "p95": 0.2768579999999474,
+          "max": 3.1806340000000546
+        },
+        "combinedCPUms": {
+          "mean": 0.30068883833333304,
+          "p95": 0.5883570000000873,
+          "max": 3.700417000000016
+        },
+        "scene": {
+          "objects": 119,
+          "meshBatches": 69,
+          "visibleBatchesNotDrawCalls": 37,
+          "allAllocatedTriangles": 19004,
+          "uniqueGeometryBytes": 138476,
+          "instanceBytes": 56640,
+          "materials": 60,
+          "articulatedObjectsOffScene": 680
+        },
+        "metrics": {
+          "decisions": 1997,
+          "los": 8954,
+          "shots": 228,
+          "replans": 232,
+          "jumps": 1,
+          "slides": 12
+        },
+        "eventPeak": 12,
+        "heapUsedBytesApprox": 70352720
+      },
+      {
+        "bots": 12,
+        "simulatedSeconds": 35,
+        "sampledSeconds": 30,
+        "frames": 1800,
+        "initMS": 292.2246379999997,
+        "physicsPlusAICPUms": {
+          "mean": 0.2197751011111043,
+          "p95": 0.5130529999996725,
+          "max": 2.8366660000001502
+        },
+        "animationCPUms": {
+          "mean": 0.17664916444444342,
+          "p95": 0.26318700000001627,
+          "max": 1.2488119999998162
+        },
+        "combinedCPUms": {
+          "mean": 0.3964242655555477,
+          "p95": 0.7262740000001031,
+          "max": 3.0379189999998744
+        },
+        "scene": {
+          "objects": 119,
+          "meshBatches": 69,
+          "visibleBatchesNotDrawCalls": 38,
+          "allAllocatedTriangles": 25356,
+          "uniqueGeometryBytes": 138476,
+          "instanceBytes": 74576,
+          "materials": 60,
+          "articulatedObjectsOffScene": 1020
+        },
+        "metrics": {
+          "decisions": 2874,
+          "los": 13035,
+          "shots": 360,
+          "replans": 312,
+          "jumps": 2,
+          "slides": 9
+        },
+        "eventPeak": 14,
+        "heapUsedBytesApprox": 67906576
+      },
+      {
+        "bots": 16,
+        "simulatedSeconds": 35,
+        "sampledSeconds": 30,
+        "frames": 1800,
+        "initMS": 266.6586360000001,
+        "physicsPlusAICPUms": {
+          "mean": 0.2578988361111096,
+          "p95": 0.6122629999999845,
+          "max": 1.544318000000203
+        },
+        "animationCPUms": {
+          "mean": 0.22317952944443784,
+          "p95": 0.31756899999982124,
+          "max": 0.6251620000002731
+        },
+        "combinedCPUms": {
+          "mean": 0.4810783655555474,
+          "p95": 0.8735870000000432,
+          "max": 1.8055810000000747
+        },
+        "scene": {
+          "objects": 119,
+          "meshBatches": 69,
+          "visibleBatchesNotDrawCalls": 39,
+          "allAllocatedTriangles": 31708,
+          "uniqueGeometryBytes": 138476,
+          "instanceBytes": 92512,
+          "materials": 60,
+          "articulatedObjectsOffScene": 1360
+        },
+        "metrics": {
+          "decisions": 3697,
+          "los": 16672,
+          "shots": 392,
+          "replans": 402,
+          "jumps": 2,
+          "slides": 16
+        },
+        "eventPeak": 17,
+        "heapUsedBytesApprox": 86319040
+      },
+      {
+        "bots": 20,
+        "simulatedSeconds": 35,
+        "sampledSeconds": 30,
+        "frames": 1800,
+        "initMS": 257.7735049999992,
+        "physicsPlusAICPUms": {
+          "mean": 0.31346692722222136,
+          "p95": 0.6315650000005917,
+          "max": 7.695952999999463
+        },
+        "animationCPUms": {
+          "mean": 0.2854325333333302,
+          "p95": 0.38383000000067113,
+          "max": 3.5470409999998083
+        },
+        "combinedCPUms": {
+          "mean": 0.5988994605555515,
+          "p95": 0.9409420000001774,
+          "max": 8.264421999999286
+        },
+        "scene": {
+          "objects": 119,
+          "meshBatches": 69,
+          "visibleBatchesNotDrawCalls": 39,
+          "allAllocatedTriangles": 38060,
+          "uniqueGeometryBytes": 138476,
+          "instanceBytes": 110448,
+          "materials": 60,
+          "articulatedObjectsOffScene": 1700
+        },
+        "metrics": {
+          "decisions": 4661,
+          "los": 21241,
+          "shots": 459,
+          "replans": 414,
+          "jumps": 2,
+          "slides": 15
+        },
+        "eventPeak": 21,
+        "heapUsedBytesApprox": 82180360
+      }
+    ],
+    "renderFPS": null,
+    "renderFrameMS": null,
+    "actualDrawCalls": null,
+    "GPUMemory": null
+  },
+  "files": {
+    "modified": [
+      "INFORME.md",
+      "PRUEBAS.json",
+      "README.md",
+      "audio.js",
+      "combat.js",
+      "game.js",
+      "hud.js",
+      "index.html",
+      "preferences.js",
+      "settings-v2.js",
+      "style.css",
+      "tests.html",
+      "verify-scene.js",
+      "weapon-models.js",
+      "world-v2.js"
+    ],
+    "added": [
+      "match.js",
+      "navigation.js",
+      "soldier.js",
+      "sw.js",
+      "verify-hud-v3.js",
+      "verify-v3.js",
+      "world-v3.js"
+    ],
+    "unchanged": [
+      "THREE-LICENSE.txt",
+      "icon.svg",
+      "input.js",
+      "level.js",
+      "physics.js",
+      "refinements.js",
+      "render.js",
+      "three.module.min.js",
+      "verify-hud.js",
+      "verify.js"
+    ],
+    "removed": [
+      "verify-v2.js (pruebas antiguas de 30 cartuchos; sustituidas por verify-v3.js)"
+    ]
+  },
+  "unverified": [
+    "Renderizado WebGL/GPU: creación del contexto no disponible en el navegador de pruebas",
+    "FPS gráficos y draw calls reales",
+    "Prueba física en iPhone/Safari, comodidad táctil y rendimiento térmico sostenido",
+    "Calidad auditiva y localización espacial escuchada en altavoces/auriculares",
+    "Ciclo de instalación, persistencia y expulsión de Service Worker en Safari"
+  ],
+  "notes": [
+    "Los eventos multitáctiles son sintéticos sobre los manejadores y DOM reales. Las dimensiones CSS no emulan un iPhone.",
+    "El benchmark de CPU excluye rasterización GPU, DOM y audio; no debe convertirse a FPS esperados.",
+    "Las cajas son activadores de recogida, no nuevos obstáculos sólidos del mapa."
+  ]
+}

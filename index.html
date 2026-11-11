@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#182a30">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="KINETIC FPS. Un laboratorio jugable de movimiento en un complejo industrial de 96 × 96 metros.">
+  <title>KINETIC FPS · NODO 09</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game" aria-label="Escenario tridimensional KINETIC FPS"></canvas>
+  <div id="load-status">Construyendo NODO 09<span></span></div>
+  <div id="hud" hidden>
+    <div class="location"><span class="live-dot"></span><b>NODO 09</b><span id="zone">01 · PATIO</span></div>
+    <div class="hud-actions"><button id="map-button" aria-label="Abrir mapa">MAPA</button><button id="settings-button" aria-label="Abrir ajustes">AJUSTES <span>Ⅱ</span></button></div>
+    <div id="reticle" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+    <div id="hitmarker" aria-hidden="true">×</div>
+    <div class="telemetry"><div class="velocity"><strong id="speed">0.0</strong><span>m/s</span></div><div class="movement"><b id="state">QUIETO</b><small><span id="ground">● SUELO</span><span><b id="fps">60</b> FPS</span></small></div><div class="speed-track"><i id="speed-fill"></i></div></div>
+    <div class="weapon-info"><span><span id="weapon-name">K-09</span> <small id="fire-mode">/ AUTO</small></span><strong id="ammo">40</strong><div><span id="ammo-status">/ 40</span> · IMPACTOS <b id="hits">00</b><i id="reload-progress"></i></div><button id="auto-reload" aria-pressed="true">AUTO RECARGA: ON</button></div>
+    <div id="health-bar" class="vital-bar"><span>VIDA</span><b id="health-value">100</b><i><em id="health-fill"></em></i></div><div id="shield-bar" class="vital-bar"><span>ESCUDO</span><b id="shield-value">100</b><i><em id="shield-fill"></em></i></div><div id="score-bar"><span id="score-label-blue">AZUL</span> <b id="score-blue">0</b><span> / </span><span id="score-label-red">ROJO</span> <b id="score-red">0</b></div><div id="match-status">ENTRENAMIENTO</div><div id="death-feedback" hidden></div><div id="damage-feedback"></div><div id="chain-hint">SPRINT <span>→</span> DESLIZA <span>→</span> SALTA</div>
+    <div id="minimap"><canvas id="minimap-canvas" aria-label="Minimapa de NODO 09"></canvas><span>N / 09</span></div><div id="weapon-slots" aria-label="Selector de armas"><button data-action="slot0">1 <b>FILO</b></button><button data-action="slot1" class="selected">2 <b>K-09</b></button><button data-action="slot2">3 <b>S-07</b></button></div><div id="ping-readout" hidden></div><div id="toast" role="status"></div>
+  </div>
+  <div id="touch-controls" aria-label="Controles táctiles" hidden>
+    <div id="look-area" aria-label="Arrastra para mirar"></div>
+    <div id="joystick" aria-label="Joystick de movimiento"><span class="stick-ring"></span><span id="stick"></span></div>
+    <button class="touch-button sprint-button" data-action="sprint" aria-label="Activar sprint"><svg viewBox="0 0 32 32"><path d="m8 26 7-9-5-5 5-5 5 5 6 1M15 17l7 5-1 6M6 19l5-6"/><circle cx="21" cy="5" r="2"/></svg><small>SPRINT</small></button>
+    <button class="touch-button aim-button" data-action="aim" aria-label="Apuntar"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="8"/><path d="M16 2v8m0 12v8M2 16h8m12 0h8"/></svg></button>
+    <button class="touch-button fire-button" data-action="fire" aria-label="Disparar y arrastrar para mirar"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="4"/><path d="M16 1v6m0 18v6M1 16h6m18 0h6"/></svg></button>
+    <button class="touch-button jump-button" data-action="jump" aria-label="Saltar"><svg viewBox="0 0 32 32"><path d="M16 26V6M7 15l9-9 9 9M6 28h20"/></svg><small>SALTO</small></button>
+    <button class="touch-button slide-button" data-action="slide" aria-label="Deslizarse o agacharse"><svg viewBox="0 0 32 32"><path d="m6 22 10-5 8 7h5M16 17l3-8 6 3M3 27h18M3 21h4"/><circle cx="20" cy="5" r="2"/></svg><small>DESLIZA</small></button>
+    <button class="touch-button reload-button" data-action="reload" aria-label="Recargar"><b>↻</b><small>RECARGA</small></button>
+    <button class="touch-button ping-button" data-action="ping" aria-label="Colocar marcador"><b>◇</b><small>PING</small></button>
+    <button class="touch-button assist-button" data-action="assist" aria-label="Alternar asistencia"><b>⊕</b><small>AYUDA</small></button>
+    <button class="touch-button mode-button" data-action="mode" aria-label="Modo de disparo"><b>≋</b><small>MODO</small></button>
+  </div>
+  <div id="hud-editor" hidden><button id="hud-collapse" aria-label="Plegar o desplegar barra HUD" aria-expanded="true">⌃</button><div class="editor-heading"><b>HUD <select id="hud-selection" aria-label="Control seleccionado"></select><button id="hud-move" title="Arrastra para mover el control seleccionado" aria-label="Arrastrar control seleccionado">✥</button></b><small>PERSONAJE EN PAUSA</small></div><label>Tamaño <input id="hud-size" type="range" min="55" max="160" value="100"><output id="hud-size-value">100%</output></label><label>Opacidad <input id="hud-opacity" type="range" min="0" max="100" value="100"><output id="hud-opacity-value">100%</output></label><div class="editor-actions"><button id="hud-preview">Vista previa</button><button id="hud-defaults">Restaurar</button><button id="hud-cancel">Cancelar</button><button id="hud-save">Guardar</button></div></div>
+  <main id="welcome" class="screen">
+    <div class="intro-top"><span class="wordmark">K<span>↗</span></span><span>LABORATORIO DE MOVIMIENTO</span><span class="build-tag">BUILD 03.0</span></div>
+    <div class="intro-content">
+      <div class="eyebrow"><span></span> MOVIMIENTO / CONTROL / COMBATE</div>
+      <h1>KINETIC<span>FPS<span class="title-dot">.</span></span></h1>
+      <p class="intro-copy">El recorrido empieza<br>con el siguiente impulso.</p>
+      <div class="intro-stats"><span><b>96 × 96</b> METROS</span><span><b>06</b> ZONAS</span><span><b>100°</b> FOV HORIZONTAL</span></div>
+      <button id="start" class="primary" disabled>PRÁCTICA RÁPIDA <span>↗</span></button>
+      <button id="configure-match" class="secondary">CONFIGURAR PARTIDA</button><p id="start-help" class="muted">WASD · Shift · C · Espacio · Mouse</p>
+      <p class="rotate-tip">↻ En el teléfono, gira la pantalla a horizontal.</p>
+    </div>
+    <div class="intro-map"><div class="map-heading"><span>EMPLAZAMIENTO 09</span><b>N ↑</b></div><div id="welcome-map" class="plan"></div><div class="map-caption"><b>NODO 09</b><span>COMPLEJO DE MANTENIMIENTO</span></div><p>Patio. Taller. Pasarelas.<br>Un circuito, múltiples recorridos.</p></div>
+    <footer class="intro-footer"><span>ACELERA / DESLIZA / ENCADENA</span><span>THREE.JS · CINEMÁTICA A 120 Hz</span></footer>
+  </main>
+  <section id="pause" class="screen pause-screen" hidden aria-label="Pausa y ajustes">
+    <div class="panel">
+      <header class="panel-header"><div><span class="eyebrow">KINETIC / LAB 01</span><h2>Tu próximo impulso.</h2></div><button id="resume" class="primary">CONTINUAR <span>↗</span></button></header>
+      <nav class="tabs"><button data-tab="settings" class="active">Ajustes</button><button data-tab="map">Recorrido</button><button data-tab="controls">Controles</button><button data-tab="reticle">Retícula</button><button data-tab="match">Partida</button><button data-tab="audio">Audio</button></nav>
+      <div id="tab-settings" class="tab-content"><div class="settings-note">Los cambios se aplican a la simulación y se guardan en este navegador.</div><div id="sliders" class="settings-grid"></div><div class="switches"><label><input type="checkbox" id="autoSprint"> Sprint automático</label><label><input type="checkbox" id="contextualSlide"> Deslizamiento contextual táctil</label><label><input type="checkbox" id="autoResolution"> Resolución adaptativa</label><label><input type="checkbox" id="sound"> Sonido</label></div><div class="panel-bottom"><button id="defaults" class="secondary">Restaurar valores</button><span id="render-stats">Física · 120 Hz</span></div></div>
+      <div id="tab-map" class="tab-content" hidden><div class="map-layout"><div id="pause-map" class="plan"></div><div class="map-description"><h3>NODO 09</h3><p>Un complejo compacto con rutas que se cruzan a distintas alturas.</p><ol><li><b>Patio:</b> acelera y cruza el paso bajo.</li><li><b>Taller:</b> sube las escaleras a la pasarela.</li><li><b>Terrazas:</b> enlaza rampa, salto y descenso.</li><li><b>Control:</b> atraviesa el interior o sube a la cubierta.</li><li><b>Vía rápida:</b> prueba tu velocidad en la recta este.</li><li><b>Transferencia:</b> cambia de ruta desde el centro.</li></ol><button id="reset-position" class="secondary">Volver al punto inicial</button></div></div></div>
+      <div id="tab-controls" class="tab-content" hidden><div class="controls-tools"><button id="customize-hud" class="primary">Personalizar HUD <span>↗</span></button><button id="reset-targets" class="secondary">Reiniciar partida</button></div><div id="look-settings" class="settings-grid"></div><div id="assist-settings" class="settings-grid"></div><div class="switches"><label><input id="invertY" type="checkbox"> Invertir eje vertical</label><label><input id="assist" type="checkbox"> Asistencia de apuntado</label><label><input id="assistMouse" type="checkbox"> Asistencia también con mouse</label><label><input id="mapRotate" type="checkbox"> Minimapa según jugador</label></div><div class="controls-grid"><div><h3>Teclado + mouse</h3><p><kbd>WASD</kbd> Movimiento <br><kbd>Shift</kbd> Sprint <br><kbd>Alt</kbd> Caminar <br><kbd>C / Ctrl</kbd> Deslizar al correr; mantener para agacharse<br><kbd>Espacio</kbd> Salto / slide jump<br><kbd>Click izq.</kbd> Disparar <br><kbd>Click der.</kbd> Apuntar<br><kbd>Esc / P</kbd> Pausa <br><kbd>R</kbd> Recargar<br><kbd>1 / 2 / 3</kbd> Cuchillo / K-09 / escopeta<br><kbd>Q</kbd> Marcador<br><kbd>B</kbd> Modo K-09 / S-07<br><kbd>H</kbd> Asistencia<br><kbd>Inicio</kbd> Reiniciar posición</p></div><div><h3>Pantalla táctil</h3><p>Joystick izquierdo para moverte. Arrastra la zona derecha para mirar.</p><p><b>SPRINT</b> y <b>apuntado</b> se activan con un toque. <b>DESLIZA</b> usa el impulso al correr; a baja velocidad alterna agachado. <b>SALTO</b> permite salir del deslizamiento.</p><p>Puedes arrastrar el botón de disparo para apuntar mientras disparas. Activa sprint automático para liberar un dedo.</p><p class="muted">El apuntado es inmediato; los efectos del arma no alteran el rayo de disparo. Intensidad de cámara 0 desactiva balanceo, inclinación y aterrizaje visual.</p></div></div></div>
+      <div id="tab-match" class="tab-content" hidden>
+ <p class="settings-note">Combate local. Todos los demás participantes son bots. El movimiento conserva los valores de NODO 09.</p>
+ <div class="match-form">
+ <label>Modo<select id="match-mode"><option value="training">Entrenamiento</option><option value="ffa">Todos contra todos</option><option value="tdm">Rojo vs. azul</option></select></label>
+ <label>Soldados <output id="bot-count-label">4</output><input id="match-bots" type="range" min="1" max="20" value="4"></label>
+ <label>Dificultad<select id="match-difficulty"><option value="easy">Fácil</option><option value="normal" selected>Normal</option><option value="hard">Difícil</option></select></label>
+ <label>Tu equipo<select id="match-team"><option value="blue">Azul</option><option value="red">Rojo</option></select></label>
+ <label>Duración<select id="match-minutes"><option value="3">3 min</option><option value="5" selected>5 min</option><option value="10">10 min</option><option value="15">15 min</option></select></label>
+ <label>Límite de eliminaciones<select id="match-limit"><option>15</option><option selected>30</option><option>50</option><option>100</option></select></label>
+ <label>Calidad de IA<select id="match-quality"><option value="adaptive">Adaptativa</option><option value="high">Alta</option><option value="low">Ahorro de CPU</option></select></label>
+ <label>Regeneración de cajas<select id="match-crateSeconds"><option value="30">30 s</option><option value="36" selected>36 s</option><option value="45">45 s</option><option value="60">60 s</option></select></label>
+ </div><p id="bot-warning" class="settings-note">4 bots · Perfiles y percepción activos.</p>
+ <div class="match-actions"><button id="begin-match" class="primary">INICIAR PARTIDA ↗</button><button id="restart-match" class="secondary">Reiniciar</button><button id="return-menu" class="secondary">Volver al menú</button></div>
+ <p class="settings-note">Entrenamiento no tiene límite de tiempo. Rojo vs. azul: daño aliado desactivado. Protección al reaparecer: 2.2 s. Reserva K-09: 360; S-07: 56.</p>
+ </div><div id="tab-audio" class="tab-content" hidden><h3>Sonido espacial</h3><p class="settings-note">Volúmenes independientes. Los disparos y pasos lejanos se atenúan; máximo 14 voces simultáneas.</p><div id="audio-settings" class="settings-grid"></div></div>
+<div id="tab-reticle" class="tab-content" hidden><p class="settings-note">Retícula centrada en el rayo real. La expansión muestra el cono de dispersión del arma equipada.</p><div class="reticle-options"><label>Diseño <select id="reticleStyle"><option value="dot">Punto</option><option value="cross">Cruz fina</option><option value="segments">Cuatro segmentos</option><option value="crossdot">Cruz y punto</option><option value="circle">Círculo fino</option><option value="dynamic">Dinámica</option></select></label><label>Color <input id="reticleColor" type="color"></label></div><div id="reticle-settings" class="settings-grid"></div><div class="switches"><label><input id="reticleDot" type="checkbox"> Punto central</label><label><input id="reticleDynamic" type="checkbox"> Expansión según dispersión real</label></div><div class="reticle-preview" id="reticle-preview"></div><button id="reset-v2-settings" class="secondary">Restaurar controles y retícula</button></div>
+    </div>
+  </section>
+  <section id="match-result" class="screen" hidden><div class="panel"><span class="eyebrow">NODO 09 / RESULTADO</span><h2 id="result-title"></h2><div id="result-scores"></div><button id="result-restart" class="primary">VOLVER A JUGAR ↗</button><button id="result-menu" class="secondary">Menú de partida</button></div></section><div id="fatal" hidden role="alert"><h2>No se pudo iniciar WebGL.</h2><p id="fatal-text"></p><button onclick="location.reload()">Volver a intentar</button></div>
+  <noscript>Este prototipo necesita JavaScript activado.</noscript>
+  <script type="module">
+    import('./game.js').catch(error=>{
+      document.getElementById('load-status').hidden=true;
+      document.getElementById('fatal').hidden=false;
+      document.getElementById('fatal-text').textContent='No se pudieron cargar los módulos. Sube todos los archivos juntos y abre la dirección HTTPS de GitHub Pages. '+error.message;
+    });
+  </script>
+</body>
+</html>

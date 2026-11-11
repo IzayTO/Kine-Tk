@@ -1,0 +1,12 @@
+import {clamp} from './physics.js';
+export const V2_DEFAULTS=Object.freeze({mouseX:1,mouseY:1,mouseADS:0.7,touchX:1,touchY:1,touchADS:0.7,invertY:false,assist:true,assistMouse:false,assistStrength:0.35,assistRadius:5,assistSlowdown:0.24,assistRange:30,mapRotate:false,autoReload:true,reticleDiameter:18,volumeEffects:.8,volumeWeapons:.8,volumeSteps:.65,volumeAmbient:.12,volumeInterface:.7,reticleStyle:'segments',reticleWidth:1,reticleLength:4,reticleGap:4,reticleSize:1,reticleColor:'#e5fff2',reticleOpacity:0.8,reticleDot:false,reticleDynamic:false});
+export function loadPreferences(storage=globalThis.localStorage){const p={...V2_DEFAULTS};try{const s=JSON.parse(storage.getItem('kinetic-preferences-v2'));for(const key in p)if(s&&typeof s[key]===typeof p[key])p[key]=s[key];}catch{}for(const k of ['mouseX','mouseY','touchX','touchY'])p[k]=clamp(p[k],0.2,3);for(const k of ['mouseADS','touchADS'])p[k]=clamp(p[k],0.15,1.5);p.assistStrength=clamp(p.assistStrength,0,0.7);p.assistRadius=clamp(p.assistRadius,1,9);p.assistSlowdown=clamp(p.assistSlowdown,0,0.5);p.assistRange=clamp(p.assistRange,5,50);for(const [k,min,max]of [['reticleDiameter',4,80],['volumeEffects',0,1],['volumeWeapons',0,1],['volumeSteps',0,1],['volumeAmbient',0,1],['volumeInterface',0,1],['reticleWidth',.5,3],['reticleLength',1,12],['reticleGap',0,12],['reticleSize',.55,1.6],['reticleOpacity',0,1]])p[k]=clamp(p[k],min,max);if(!['dot','cross','segments','crossdot','dynamic','circle'].includes(p.reticleStyle))p.reticleStyle='segments';if(!/^#[0-9a-f]{6}$/i.test(p.reticleColor))p.reticleColor=V2_DEFAULTS.reticleColor;return p;}
+export function savePreferences(p,storage=globalThis.localStorage){try{storage.setItem('kinetic-preferences-v2',JSON.stringify(p));return true;}catch{return false;}}
+export function assistDelta(yaw,pitch,dyaw,dpitch,target,p){
+  if(!p.assist||!target||Math.hypot(dyaw,dpitch)<1e-8)return [dyaw,dpitch];
+  const ex=Math.atan2(Math.sin(target.yaw-yaw),Math.cos(target.yaw-yaw)),ey=target.pitch-pitch,r=p.assistRadius*Math.PI/180,angle=Math.hypot(ex,ey);
+  if(angle>r||target.distance>p.assistRange||!target.visible)return [dyaw,dpitch];
+  const weight=1-angle/r,slow=1-p.assistSlowdown*weight;
+  const correction=Math.hypot(dyaw,dpitch)*p.assistStrength*weight*0.38;
+  return [dyaw*slow+clamp(ex,-correction,correction),dpitch*slow+clamp(ey,-correction,correction)];
+}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KINETIC · Verificación técnica</title>
+<style>body{max-width:900px;margin:40px auto;padding:0 22px;background:#172b31;color:#dce9dd;font:14px/1.7 system-ui}h1{color:#7fdfba}li{padding:10px;border-bottom:1px solid #466160}b{color:#8eebbf}.fail{color:#f5a27f}a{color:#85dbc0}small{display:block;color:#b2c8c0}button{padding:12px 20px;background:#83dcb8;border:0;color:#142e37;cursor:pointer}</style>
+<h1>NODO 09 V3 · Verificación técnica</h1>
+<p>Pruebas automáticas sobre el controlador, el mapa y la geometría Three.js reales. El raycasting se calcula sin dibujar la escena. El editor y los controles se comprueban desde <a href="index.html?qa=1">diagnóstico de HUD</a>, con eventos sintéticos independientes y sin render 3D.</p>
+<p>Estas comprobaciones no miden FPS gráficos, no emulan un iPhone y no evalúan la comodidad del control táctil.</p>
+<button id="run">Ejecutar pruebas</button><h2 id="summary"></h2><ol id="results"></ol>
+<a href="index.html">Volver al prototipo</a>
+<script type="module">
+  import {runChecks} from './verify.js';
+  import {runV3Checks} from './verify-v3.js';
+  document.querySelector('#run').onclick=()=>{
+    const physics=runChecks(),scene=runV3Checks();
+    const results=[...physics.results,...scene.results];
+    document.querySelector('#summary').textContent=(physics.passed+scene.passed)+' / '+results.length+' correctas';
+    document.querySelector('#results').replaceChildren(...results.map(r=>{
+      const li=document.createElement('li'),b=document.createElement('b'),s=document.createElement('small');
+      b.textContent=(r.passed?'✓ ':'✕ ')+r.name;if(!r.passed)b.className='fail';s.textContent=r.detail;li.append(b,s);return li;
+    }));
+  };
+</script>
+</html>
