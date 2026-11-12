@@ -12,6 +12,12 @@ export class Supplies{
  reset(){for(const a of this.match.actors)this.resetActor(a);for(const d of this.drops){d.active=false;d.amount=0;d.flyStart=-100;d.collector=null;}}
  reachable(a,c,radius=3){return a.alive&&flat(a.body,c)<=radius+1e-9&&Math.abs(a.body.y-c.y)<1&&obstruction(this.match.world.colliders,chest(a),{x:c.x,y:c.y+.55,z:c.z})>.999;}
  nearest(a){let best=null,dist=3.000001;for(const c of this.match.crates){const d=flat(a.body,c);if(c.available&&d<dist&&this.reachable(a,c)){best=c;dist=d;}}return best;}
+ lookedAt(a,origin,dir){let best=null,distance=5;for(const c of this.match.crates){if(!c.available||flat(a.body,c)>3.000001)continue;let near=0,far=5;
+   // Include the projected interaction emblem just above the lid in the gaze target.
+   for(const [axis,min,max]of [['x',c.x-.5,c.x+.5],['y',c.y+.03,c.y+1.02],['z',c.z-.42,c.z+.42]]){const v=dir[axis],o=origin[axis];if(Math.abs(v)<1e-8){if(o<min||o>max){far=-1;break;}}else{let t0=(min-o)/v,t1=(max-o)/v;if(t0>t1)[t0,t1]=[t1,t0];near=Math.max(near,t0);far=Math.min(far,t1);}}
+   if(near<=far&&near<distance&&this.reachable(a,c)){best=c;distance=near;}}
+  return best;
+ }
  hold(a,id,dt,held){const c=this.match.crates[id];if(!held||!this.match.running||this.match.ended||!c?.available||!this.reachable(a,c)){a.opening=null;return false;}if(a.consuming)return false;if(a.opening?.id!==id)a.opening={id,progress:0};a.opening.progress+=dt/OPEN_SECONDS;if(a.opening.progress+1e-8>=1){this.open(c,a);a.opening=null;return true;}return false;}
  open(c,a){if(!c.available)return false;const m=this.match;c.available=false;c.lid=1;c.ready=m.time+clamp(m.config.crateSeconds,20,90);c.openedAt=m.time;
   // Fixed positions over the valid crate footprint: no loot behind walls or on another floor.

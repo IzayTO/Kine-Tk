@@ -118,10 +118,10 @@ function tick(now){
       }
       if(match.player.alive){
         const manual=sample.fire||sample.fireStart;if(manual)match.supplies.cancel(match.player);
-        combatUI.step(h);
+        combatUI.step(h,sample);
         aimOrigin.x=player.x;aimOrigin.y=player.y+view.eye;aimOrigin.z=player.z;
         const ray={x:-Math.sin(input.yaw)*Math.cos(input.pitch),y:Math.sin(input.pitch),z:-Math.cos(input.yaw)*Math.cos(input.pitch)};
-        const automatic=!manual&&!!aimSupport.autoTarget(aimOrigin,ray,sample.aim&&view.aim>.90);
+        const automatic=!manual&&!!aimSupport.autoTarget(aimOrigin,ray,sample.aim&&view.aim>.65);
         if(automatic){sample.fire=true;if(arsenal.selected===1&&arsenal.mode==='semi'&&arsenal.time+h>=arsenal.slots[1].ready)sample.fireStart=true;}
         if(match.player.consuming||match.player.opening){sample.fire=false;sample.fireStart=false;}
         arsenal.step(h,sample,{busy:!!match.player.consuming||!!match.player.opening,speed:player.speed,grounded:player.grounded,aim:sample.aim&&arsenal.selected!==0},e=>{
@@ -145,7 +145,7 @@ function tick(now){
       registerHits(result);
     }events.length=0;
     processMatchEvents();
-    $('death-feedback').hidden=match.player.alive;if(!match.player.alive)$('death-feedback').textContent='ELIMINADO · REAPARICIÓN EN '+Math.max(0,match.player.deadUntil-match.time).toFixed(1)+' s';
+
     if(match.config.quality==='adaptive')match.qualityScale=fps<46?1.5:1;
     assistTime+=dt;if(assistTime>=.08){assistTime=0;assistCache=preferences.assist?view.assistTarget(input.yaw,input.pitch,preferences):null;}
     reticle.update(arsenal.spread({speed:player.speed,grounded:player.grounded,aim:sampled.aim}),view.camera.fov,innerHeight,arsenal.weapon.id);
@@ -244,12 +244,12 @@ try{
   for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>tab(b.dataset.tab));
   lastTime=performance.now();requestAnimationFrame(tick);
   // Read-only diagnostics are useful for reproducible desktop QA and user reports.
-  window.kinetic={snapshot:()=>({playing,position:{x:player.x,y:player.y,z:player.z},velocity:{x:player.vx,y:player.vy,z:player.vz},speed:player.speed,state:player.state,grounded:player.grounded,height:player.height,version:'3-combate',match:match.snapshot(),health:match.player.health,shield:match.player.shield,reserve:arsenal.reserve,autoReload:arsenal.autoReload,diagnostic,editing:editor.editing,yaw:input.yaw,pitch:input.pitch,weapon:arsenal.weapon.id,ammo:arsenal.ammo,reloading:!!arsenal.reload,mode:arsenal.mode,preferences:{...preferences},metrics:{...metrics},horizontalFov:params.hFov,verticalFov:view.camera.fov,aspect:view.camera.aspect,fps,drawCalls:view.stats.calls,triangles:view.stats.triangles,shots,hits,params:{...params}})};
+  window.kinetic={snapshot:()=>({playing,position:{x:player.x,y:player.y,z:player.z},velocity:{x:player.vx,y:player.vy,z:player.vz},speed:player.speed,state:player.state,grounded:player.grounded,height:player.height,version:'3-respuesta',match:match.snapshot(),health:match.player.health,shield:match.player.shield,reserve:arsenal.reserve,autoReload:arsenal.autoReload,diagnostic,editing:editor.editing,yaw:input.yaw,pitch:input.pitch,weapon:arsenal.weapon.id,ammo:arsenal.ammo,reloading:!!arsenal.reload,mode:arsenal.mode,preferences:{...preferences},metrics:{...metrics},horizontalFov:params.hFov,verticalFov:view.camera.fov,aspect:view.camera.aspect,fps,drawCalls:view.stats.calls,triangles:view.stats.triangles,shots,hits,params:{...params}})};
   if(diagnostic){
     const advance=(count=1)=>{cancelAnimationFrame(frame);for(let i=0;i<count;i++){const now=performance.now();lastTime=now-1000/60;tick(now);cancelAnimationFrame(frame);}frame=requestAnimationFrame(tick);};
     const qa={advance,player,input,view,arsenal,editor,preferences,minimap,reticle,pause,start,tab,match,beginSimulation,combatUI,aimSupport};window.kineticQA=qa;
     const run=document.createElement('button');run.id='qa-run';run.textContent='Ejecutar pruebas HUD';run.className='qa-run';document.body.append(run);
-    run.onclick=async()=>{run.disabled=true;try{const {runCombatHUDChecks}=await import('./verify-combat-ui.js');const result=await runCombatHUDChecks(qa);const box=document.createElement('pre');box.id='qa-results';box.className='qa-results';box.textContent=JSON.stringify(result,null,2);document.getElementById('qa-results')?.remove();document.body.append(box);run.textContent=result.passed+' / '+result.total+' HUD';}catch(e){run.textContent='Error: '+e.message;console.error(e);}finally{run.disabled=false;}};
+    run.onclick=async()=>{run.disabled=true;try{const {runFeedbackHUDChecks}=await import('./verify-feedback-ui.js');const result=await runFeedbackHUDChecks(qa);const box=document.createElement('pre');box.id='qa-results';box.className='qa-results';box.textContent=JSON.stringify(result,null,2);document.getElementById('qa-results')?.remove();document.body.append(box);run.textContent=result.passed+' / '+result.total+' HUD';}catch(e){run.textContent='Error: '+e.message;console.error(e);}finally{run.disabled=false;}};
   }
 }catch(error){
   console.error(error);$('load-status').hidden=true;$('fatal-text').textContent=error.message+' — Abre el proyecto mediante GitHub Pages (HTTPS), con todos sus archivos en la misma carpeta.';$('fatal').hidden=false;

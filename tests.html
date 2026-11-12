@@ -12,10 +12,11 @@
   import {runChecks} from './verify.js';
   import {runV3Checks} from './verify-v3.js';
   import {runCombatChecks} from './verify-combat.js';
+  import {runFeedbackChecks} from './verify-feedback.js';
   document.querySelector('#run').onclick=()=>{
-    const physics=runChecks(),scene=runV3Checks(),combat=runCombatChecks();
-    const results=[...physics.results,...scene.results,...combat.results];
-    document.querySelector('#summary').textContent=(physics.passed+scene.passed+combat.passed)+' / '+results.length+' correctas';
+    const physics=runChecks(),scene=runV3Checks(),combat=runCombatChecks(),feedback=runFeedbackChecks();
+    const results=[...physics.results,...scene.results,...combat.results,...feedback.results];
+    document.querySelector('#summary').textContent=results.filter(r=>r.passed).length+' / '+results.length+' correctas';
     document.querySelector('#results').replaceChildren(...results.map(r=>{
       const li=document.createElement('li'),b=document.createElement('b'),s=document.createElement('small');
       b.textContent=(r.passed?'✓ ':'✕ ')+r.name;if(!r.passed)b.className='fail';s.textContent=r.detail;li.append(b,s);return li;

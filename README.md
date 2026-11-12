@@ -1,6 +1,6 @@
 # KINETIC FPS | NODO 09 · V3
 
-Actualización de combate y suministros · 12 de noviembre de 2026. Conserva el mapa, los bots articulados y la física de tu V3.
+Actualización de respuesta, viñetas y cajas · 12 de noviembre de 2026. Conserva el mapa, los bots articulados y la física de tu V3.
 
 ## Publicar desde el iPhone
 
@@ -14,14 +14,18 @@ Sin compilación, instalaciones, CDN ni backend. Three.js y su licencia están i
 
 ## Lo nuevo y cómo usarlo
 
-- **Asistencia:** AJUSTES → CONTROLES → Asistencia · Intensidad. Ahora llega a **2×**. Prueba **1.2–1.5×** y ajústala a tu gusto. Se conservan tus valores guardados; no se suben a la fuerza. En ADS acompaña al enemigo mientras sigues corrigiendo la mira; al dejar de corregir se detiene. Respeta paredes, alcance y equipos.
-- **Autodisparo:** activa **AUTO ON** en el HUD (tecla **F**). Solo dispara en ADS cuando el rayo real apunta a un enemigo vivo y visible. Deja de disparar al eliminarlo o perderlo. Empieza desactivado y guarda tu elección.
+- **Seguimiento fuerte:** AJUSTES → CONTROLES → Asistencia · Intensidad, de **0 a 4×**. Valor inicial **1.5×**, alcance inicial **90 m** (ajustable hasta 110 m). En ADS acompaña al enemigo aunque no muevas continuamente el dedo. Puedes desactivar «Seguimiento continuo en ADS» para exigir corrección manual. Una corrección decidida para apartarte sigue teniendo prioridad. Respeta paredes, equipos y protección de aparición.
+- **Tus ajustes:** se conservan sensibilidad y distribución. Solo los antiguos valores predeterminados de asistencia (0.85× / 30 m) se actualizan a los nuevos; el resto de valores personalizados se conserva.
+- **Autodisparo:** activa **AUTO ON** en el HUD (tecla **F**). Responde en cuanto el rayo apunta a un enemigo válido durante ADS, sin la espera extra anterior. Conserva la cadencia y deja de disparar al eliminarlo o perderlo. Empieza desactivado y guarda tu elección.
 - **Mira K-09:** AJUSTES → RETÍCULA → Mira física K-09 permite cuadrada/circular. También hay ambas retículas de pantalla. La escopeta usa un cuadro más amplio.
-- **Cajas:** a 3 m aparece **ABRIR**. Mantén el botón o **E** durante **1 segundo** hasta completar el anillo. Soltar cancela. La tapa abre inmediatamente y aparece el botín.
+- **Cajas:** a 3 m aparece **ABRIR**. Mantén el botón o **E** durante **1 segundo** hasta completar el anillo. Soltar cancela. La tapa se levanta inmediatamente como un baúl y permanece abierta, con el interior vacío, hasta la regeneración. Aparece el mismo botín de la versión anterior.
+- **Autoabrir opcional:** AJUSTES → CONTROLES → «Abrir cajas al mantenerlas en la mira». A menos de 3 m, mira la caja durante **1 segundo**; apartar la mirada cancela el anillo. Está desactivado inicialmente; el botón/E sigue disponible.
 - **Botín:** acércate a 1.6 m para recogerlo. Si tienes la reserva llena, permanece y aparece «Munición máx.». Lo que no quepa se conserva hasta la siguiente regeneración de esa caja.
-- **Vendajes/miniescudos:** vienen en paquetes de **3**; caben hasta **9** de cada tipo. Aparecen junto al selector de armas. Toca una vez para usar uno: **+25 de vida en 3.5 s** o **+25 de escudo en 2 s**, hasta 100. Una barra y el borde verde/azul muestran el consumo. Cada uso necesita otro toque. Disparar, recargar o cambiar arma lo cancela sin gastar el objeto; moverte no lo cancela.
+- **Vendajes/miniescudos:** vienen en paquetes de **3**; caben hasta **9** de cada tipo. Aparecen junto al selector de armas. Toca una vez para usar uno: **+25 de vida en 3.5 s** o **+25 de escudo en 2 s**, hasta 100. Una barra y una viñeta verde/azul pronunciada muestran el consumo. El color respira suavemente cada 0.9 s, sin encenderse y apagarse; desaparece gradualmente al terminar. Cada uso necesita otro toque. Disparar, recargar o cambiar arma lo cancela sin gastar el objeto; moverte no lo cancela.
 - **Recarga:** también puedes tocar el recuadro de munición. Su interruptor AUTO RECARGA sigue siendo independiente.
-- **Combate:** viñeta roja por daño/vida baja, flechas blancas de aliados incluso detrás de paredes y lista breve de bajas con nombres por equipo. Toca una fila para quitarla.
+- **Combate:** viñeta roja reforzada por daño/vida baja y flechas blancas de aliados incluso detrás de paredes.
+- **Bajas:** máximo **4** visibles, **3 s** cada una más una salida breve. Las demás esperan en cola, aparecen en orden y tienen sus propios tres segundos. Toca una fila para quitarla.
+- **Eliminación:** escenario borroso, controles nítidos, bordes negros y rojos, doce mensajes rojos variados y cuenta de reaparición blanca sin recuadro. Todo se retira al reaparecer.
 - **Minimapa:** un enemigo que dispara revela su última posición de disparo. Permanece 1.8 s y se desvanece hasta 3.2 s; vuelve a encenderse con nuevos disparos. No sigue a un enemigo oculto que dejó de disparar.
 
 ## Controles PC

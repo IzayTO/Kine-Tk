@@ -1,8 +1,8 @@
 {
-  "build": "NODO 09 V3 · Combate y suministros",
   "date": "2026-11-12",
-  "base": "V3 entregada el 11 de noviembre, conservada localmente; derivada de V2 real del repositorio IzayTO/KINEtiK",
-  "tests": {
+  "release": "NODO 09 V3 · Respuesta y feedback",
+  "base": "ZIP V3 de combate y suministros anterior; SHA256 bc6ba844a83d9ba3ff9e1eb0ab995c5a217fdec82a3a8572760980b172015cfb",
+  "logic": {
     "physics": {
       "passed": 24,
       "total": 24,
@@ -395,7 +395,7 @@
           "detail": "OK"
         },
         {
-          "name": "Asistencia · No sigue sola sin movimiento manual reciente",
+          "name": "Asistencia · Modo manual opcional no sigue sin corrección reciente",
           "passed": true,
           "detail": "OK"
         },
@@ -412,7 +412,7 @@
         {
           "name": "Asistencia · Intensidad independiente de 30/60/120 Hz",
           "passed": true,
-          "detail": "0.001543471133028794 / 0.0012768143447345385 / 0.001163308600824287"
+          "detail": "8.414994183279666e-7 / 6.509979727311735e-7 / 5.785985206121095e-7"
         },
         {
           "name": "Asistencia · Objetivo actualizado y enemigo muerto descartado",
@@ -545,33 +545,144 @@
           "detail": "OK"
         }
       ]
+    },
+    "feedback": {
+      "passed": 23,
+      "total": 23,
+      "results": [
+        {
+          "name": "Respuesta · Preferencias 4×, 110 m y autoabrir persisten",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Respuesta · Migración conserva sensibilidad y ajustes propios",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Seguimiento · ADS continuo funciona sin mover el dedo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Seguimiento · Intensidad cero deja el control manual",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Seguimiento · 4× converge con fuerza en 100 ms",
+          "passed": true,
+          "detail": "Error angular final 0.0000°"
+        },
+        {
+          "name": "Seguimiento · Enemigo móvil a corta distancia",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Seguimiento · Adquisición a 90 m en línea libre",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Seguimiento · Cambia inmediatamente tras morir el objetivo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autodisparo · Primera comprobación válida sin espera añadida",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autodisparo · Alcance real independiente del radio de ayuda",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Curación · Mini visible durante los dos segundos, sin apagarse",
+          "passed": true,
+          "detail": "Opacidad 0.62–0.80"
+        },
+        {
+          "name": "Curación · Entrada y salida continuas conservan el color",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Daño · Impacto reforzado y renovación sin corte",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bajas · Cuatro visibles y cinco pendientes sin sobrescribir",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bajas · Vida de tres segundos empieza al entrar en pantalla",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bajas · Salida gradual por antigüedad y orden ascendente",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bajas · Ráfaga de 100 eventos conserva todas las entradas",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Muerte · Doce mensajes variados sin repetición inmediata",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Muerte · Negro antes que rojo, entrada suave del título",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Caja · Tapa se eleva sobre la bisagra tras abrir",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Caja · Raycast superior ve fondo vacío y no un bloque sólido",
+          "passed": true,
+          "detail": "Altura del fondo 0.097 m"
+        },
+        {
+          "name": "Caja · Cerrada vuelve a cubrir el hueco",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autoabrir · Mirada, alcance y cancelación al apartarse",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
     }
   },
   "browserLogic": {
-    "passed": 105,
-    "total": 105,
-    "environment": "Chrome de escritorio, tests.html, código real sin renderizar 3D; mismos casos de lógica que Node, no contados dos veces"
+    "passed": 128,
+    "total": 128,
+    "source": "tests.html ejecutado en Chrome; resumen observado 128 / 128 correctas, cero filas .fail"
   },
   "hud": {
+    "passed": 73,
+    "total": 73,
+    "source": "Resultado observado en #qa-results tras ejecutar runFeedbackHUDChecks en Chrome; no inferido de análisis estático",
     "measurements": {
-      "minimapMeanCPUms": 0.008000000000174623,
+      "environment": "Chrome de escritorio del entorno, DOM y Canvas 2D reales, diagnóstico sin WebGL",
+      "minimapMeanCPUms": 0.010499999999883583,
       "canvasUpdates": 200,
-      "approxJSHeapBytes": 20345450,
-      "environment": "Chrome de escritorio del entorno; Canvas 2D real, sin GPU 3D y sin emulación móvil",
+      "approxJSHeapBytes": 10971561,
       "responsive": [
-        {
-          "width": 844,
-          "height": 390,
-          "mode": "landscape"
-        },
-        {
-          "width": 390,
-          "height": 844,
-          "mode": "portrait"
-        }
-      ],
-      "scope": "DOM real en Chrome; eventos PointerEvent sintéticos y ciclo real del juego con reloj controlado para la integración; no Safari ni dispositivo emulado",
-      "combatResponsive": [
         {
           "width": 844,
           "height": 390
@@ -580,280 +691,301 @@
           "width": 390,
           "height": 844
         }
-      ]
+      ],
+      "scope": "Eventos sintéticos e iframes de dimensiones CSS; no emulación de Safari ni dispositivo"
     },
-    "passed": 54,
-    "total": 54,
     "results": [
       {
         "name": "HUD · Abrir muestra controles reales y oculta menús",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Selección no dispara, salta ni mueve cámara",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Arrastre directo y límite seguro",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Escala centro estable, área táctil y opacidad cero",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Segundo dedo no secuestra un arrastre",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Vista previa mantiene el bloqueo de entradas",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Posición, velocidad y perspectiva congeladas",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Guardar aplica sin reinicio y persiste",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Cancelar restaura la distribución guardada",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Restaurar distribución y cancelar restauración",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "HUD · Perfiles separados y sin crecimiento DOM al reabrir",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Multitouch · Mover, mirar, disparar y saltar",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Multitouch · Control con opacidad cero sigue funcionando",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Multitouch · Arrastrar disparo y cancelar un dedo",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Controles · Sensibilidades separadas e inversión",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Pausa · Libera controles retenidos",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 HUD · Vida, escudo, puntuación y partida editables",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 HUD · Plegar conserva selección y edición",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 HUD · Editar barra vital con panel plegado",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 HUD · Reabrir mantiene perspectiva y reloj",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 Retícula · Círculo fino con diámetro real",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 HUD · Auto recarga dentro del indicador",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 UI 844×390 · Inicia sin errores",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 UI 844×390 · Tres ranuras reciben el toque real",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 UI 844×390 · Áreas seguras y perfiles",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 UI 390×844 · Inicia sin errores",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 UI 390×844 · Tres ranuras reciben el toque real",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "V3 UI 390×844 · Áreas seguras y perfiles",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Nuevos controles en editor y reutilización DOM",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Tocar balas inicia recarga real",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Interruptor auto recarga no dispara otra recarga",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Botón autodisparo cambia y persiste",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Vendaje inicia lógica, barra y viñeta verde",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Un segundo toque no superpone consumos",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Editar congela consumo y no activa autodisparo",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Final de curación +25 con salida suave",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Miniescudo cambia a azul",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Interacción visible y tocable a menos de 3 m",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Anillo horario avanza mientras mantienes",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Soltar cancela apertura",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Caja completa se abre y el botón desaparece",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Botín actualiza reserva y aviso",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Iconos de botín son planos orientados a cámara",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Aliado tiene flecha que sigue cada frame",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · No dibuja flechas de enemigos sobre paredes",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Feed usa nombres de color y se puede cerrar",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Retícula cuadrada seleccionable y escopeta amplia",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate HUD · Los nodos no crecen al actualizar 120 cuadros",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate integrado · ADS autodispara y corta exactamente tras la baja",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate integrado · No continúa disparando al cadáver",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate UI 844×390 · Controles nuevos reciben el toque",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate UI 844×390 · Arrastre/guardado de consumibles",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate UI 390×844 · Controles nuevos reciben el toque",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
       },
       {
         "name": "Combate UI 390×844 · Arrastre/guardado de consumibles",
-        "passed": true,
-        "detail": "OK"
+        "passed": true
+      },
+      {
+        "name": "Respuesta HUD · Intensidad 4× y alcance 110 m disponibles",
+        "passed": true
+      },
+      {
+        "name": "Respuesta HUD · Autoabrir se activa y persiste sin reiniciar",
+        "passed": true
+      },
+      {
+        "name": "Autoabrir integrado · La mirada inicia el anillo real",
+        "passed": true
+      },
+      {
+        "name": "Autoabrir integrado · Apartar mirada cancela sin abrir",
+        "passed": true
+      },
+      {
+        "name": "Autoabrir integrado · Completar abre tapa y crea botín",
+        "passed": true
+      },
+      {
+        "name": "Viñeta integrada · Mini azul visible y separada de controles",
+        "passed": true
+      },
+      {
+        "name": "Viñeta integrada · Respiración continua durante consumo de 2 s",
+        "passed": true
+      },
+      {
+        "name": "Viñeta integrada · Final cura y desvanece",
+        "passed": true
+      },
+      {
+        "name": "Viñeta integrada · Daño reforzado conserva centro y controles",
+        "passed": true
+      },
+      {
+        "name": "Cola HUD · Ocho bajas muestran cuatro y encolan cuatro",
+        "passed": true
+      },
+      {
+        "name": "Cola HUD · Cada baja permanece tres segundos completos",
+        "passed": true
+      },
+      {
+        "name": "Cola HUD · Desaparición gradual antes de avanzar la cola",
+        "passed": true
+      },
+      {
+        "name": "Cola HUD · Pendientes nuevos tienen temporizador propio",
+        "passed": true
+      },
+      {
+        "name": "Cola HUD · Cuatro filas caben y mantienen colores/orden",
+        "passed": true
+      },
+      {
+        "name": "Muerte integrada · Mensaje rojo y cuenta blanca sin recuadro",
+        "passed": true
+      },
+      {
+        "name": "Muerte integrada · Blur solo escena, viñetas negras y rojas",
+        "passed": true
+      },
+      {
+        "name": "Muerte integrada · Reaparición retira efectos suavemente",
+        "passed": true
+      },
+      {
+        "name": "Muerte integrada · Siguiente eliminación cambia frase",
+        "passed": true
+      },
+      {
+        "name": "Respuesta HUD · Efectos reutilizan nodos sin crecimiento DOM",
+        "passed": true
       }
     ]
   },
@@ -884,243 +1016,84 @@
       }
     ]
   },
-  "performance": {
-    "environment": "Node CPU; 120 Hz física/IA, 60 Hz animación simulados, 20 s por escenario, 3 s calentamiento. Sin GPU, DOM ni audio. No son FPS.",
-    "unchanged": {
-      "physics.js": true,
-      "level.js": true,
-      "render.js": true,
-      "refinements.js": true,
-      "navigation.js": true,
-      "soldier.js": true
+  "conservation": {
+    "physics.js": {
+      "unchanged": true,
+      "sha256": "c6c78049f1a7113129c9260e66b332f0f89bed85f0a42e8e578dd01057df3d6a"
     },
-    "results": [
-      {
-        "bots": 1,
-        "versions": [
-          {
-            "build": "V3 anterior",
-            "simulation": {
-              "mean": 0.030384334313726294,
-              "p95": 0.08374599999990551
-            },
-            "visual": {
-              "mean": 0.031146328431371145,
-              "p95": 0.0727399999999534
-            },
-            "lootBatches": 0,
-            "lootQuads": 0
-          },
-          {
-            "build": "actualización",
-            "simulation": {
-              "mean": 0.029762693137256206,
-              "p95": 0.07375100000001567
-            },
-            "visual": {
-              "mean": 0.03207321862745135,
-              "p95": 0.059799999999995634
-            },
-            "lootBatches": 4,
-            "lootQuads": 18
-          }
-        ]
-      },
-      {
-        "bots": 4,
-        "versions": [
-          {
-            "build": "V3 anterior",
-            "simulation": {
-              "mean": 0.14059254411764888,
-              "p95": 0.5645220000001245
-            },
-            "visual": {
-              "mean": 0.09291928333333384,
-              "p95": 0.1790800000001127
-            },
-            "lootBatches": 0,
-            "lootQuads": 0
-          },
-          {
-            "build": "actualización",
-            "simulation": {
-              "mean": 0.09109131764705401,
-              "p95": 0.2261919999998554
-            },
-            "visual": {
-              "mean": 0.0854119441176446,
-              "p95": 0.1418029999999817
-            },
-            "lootBatches": 4,
-            "lootQuads": 19
-          }
-        ]
-      },
-      {
-        "bots": 8,
-        "versions": [
-          {
-            "build": "V3 anterior",
-            "simulation": {
-              "mean": 0.16543347745097542,
-              "p95": 0.4240500000000793
-            },
-            "visual": {
-              "mean": 0.14245745098039117,
-              "p95": 0.26274599999987913
-            },
-            "lootBatches": 0,
-            "lootQuads": 0
-          },
-          {
-            "build": "actualización",
-            "simulation": {
-              "mean": 0.19365025098039032,
-              "p95": 0.4567090000000462
-            },
-            "visual": {
-              "mean": 0.15762538039215293,
-              "p95": 0.27328299999999217
-            },
-            "lootBatches": 4,
-            "lootQuads": 18
-          }
-        ]
-      },
-      {
-        "bots": 12,
-        "versions": [
-          {
-            "build": "V3 anterior",
-            "simulation": {
-              "mean": 0.2818538882353069,
-              "p95": 0.6812279999999191
-            },
-            "visual": {
-              "mean": 0.2011255117646946,
-              "p95": 0.3129719999997178
-            },
-            "lootBatches": 0,
-            "lootQuads": 0
-          },
-          {
-            "build": "actualización",
-            "simulation": {
-              "mean": 0.2651874274509755,
-              "p95": 0.5677370000003066
-            },
-            "visual": {
-              "mean": 0.2046484499999973,
-              "p95": 0.32361799999944196
-            },
-            "lootBatches": 4,
-            "lootQuads": 14
-          }
-        ]
-      },
-      {
-        "bots": 16,
-        "versions": [
-          {
-            "build": "V3 anterior",
-            "simulation": {
-              "mean": 0.28092850098042066,
-              "p95": 0.6266050000003816
-            },
-            "visual": {
-              "mean": 0.2367774539215294,
-              "p95": 0.31693799999993644
-            },
-            "lootBatches": 0,
-            "lootQuads": 0
-          },
-          {
-            "build": "actualización",
-            "simulation": {
-              "mean": 0.32540179607843434,
-              "p95": 0.7143980000000738
-            },
-            "visual": {
-              "mean": 0.26876430686273073,
-              "p95": 0.37673799999993207
-            },
-            "lootBatches": 4,
-            "lootQuads": 17
-          }
-        ]
-      },
-      {
-        "bots": 20,
-        "versions": [
-          {
-            "build": "V3 anterior",
-            "simulation": {
-              "mean": 0.3294147284313567,
-              "p95": 0.6762699999999313
-            },
-            "visual": {
-              "mean": 0.2928341127451083,
-              "p95": 0.39407499999924767
-            },
-            "lootBatches": 0,
-            "lootQuads": 0
-          },
-          {
-            "build": "actualización",
-            "simulation": {
-              "mean": 0.3706449568627428,
-              "p95": 0.7433209999999235
-            },
-            "visual": {
-              "mean": 0.3086355588235361,
-              "p95": 0.415407000000414
-            },
-            "lootBatches": 4,
-            "lootQuads": 15
-          }
-        ]
-      }
-    ]
-  },
-  "preservation": {
-    "unchangedFiles": [
-      "THREE-LICENSE.txt",
-      "icon.svg",
-      "level.js",
-      "navigation.js",
-      "physics.js",
-      "refinements.js",
-      "render.js",
-      "soldier.js",
-      "three.module.min.js",
-      "verify-hud-v3.js",
-      "verify-hud.js",
-      "verify-scene.js",
-      "verify.js",
-      "world-v2.js"
-    ],
-    "sha256": {
-      "physics.js": "c6c78049f1a7113129c9260e66b332f0f89bed85f0a42e8e578dd01057df3d6a",
-      "level.js": "1e67120af549f7c1b61549b3625daa3919129b4367fa48ce5439eb4310df38bd",
-      "render.js": "86d5c61579f25913654aa2fa836fe6f5171ddc8a88e3040b137cf5ae4b79ca62",
-      "refinements.js": "c370c8c62dfa95fa4571bfeaf95a04b10f7e5b056f9921b98f976d7a800e23b9",
-      "navigation.js": "1d05522c894491888b323db4fb74784f8108fd3d31f92d462fb357e57c982921",
-      "soldier.js": "3b64134665cbd89942e025617d1869448ca6aa72f0c2df22927eb8d8f0989d88"
+    "level.js": {
+      "unchanged": true,
+      "sha256": "1e67120af549f7c1b61549b3625daa3919129b4367fa48ce5439eb4310df38bd"
+    },
+    "render.js": {
+      "unchanged": true,
+      "sha256": "86d5c61579f25913654aa2fa836fe6f5171ddc8a88e3040b137cf5ae4b79ca62"
+    },
+    "refinements.js": {
+      "unchanged": true,
+      "sha256": "c370c8c62dfa95fa4571bfeaf95a04b10f7e5b056f9921b98f976d7a800e23b9"
+    },
+    "navigation.js": {
+      "unchanged": true,
+      "sha256": "1d05522c894491888b323db4fb74784f8108fd3d31f92d462fb357e57c982921"
+    },
+    "soldier.js": {
+      "unchanged": true,
+      "sha256": "3b64134665cbd89942e025617d1869448ca6aa72f0c2df22927eb8d8f0989d88"
+    },
+    "world-v2.js": {
+      "unchanged": true,
+      "sha256": "78cb5b6bf4bc73215a4539acbd6bcf8debf1a3fa20fbdc06a4496e77dc170625"
+    },
+    "input.js": {
+      "unchanged": true,
+      "sha256": "4555845c4413e41921a7b67123efc35561f572041944d8aead3ce5f97c85ef24"
+    },
+    "combat.js": {
+      "unchanged": true,
+      "sha256": "f7ea6a169c0e3b3743702233bb395753594d122a1b37e98c0473e16bced11442"
+    },
+    "match.js": {
+      "unchanged": true,
+      "sha256": "df6eabbbb9388dc74fd0dd3693f498e040cdd9960933e61c65db0e2aff0a0b08"
+    },
+    "audio.js": {
+      "unchanged": true,
+      "sha256": "24f0203b66fd29ec2e47e63c7e2f5cae25d195cd4cac4ab7227157302429a6d8"
+    },
+    "hud.js": {
+      "unchanged": true,
+      "sha256": "41e87f12333a32c238fc7514dd99628794dbe4d38670797dd7b96a877239fad7"
+    },
+    "weapon-models.js": {
+      "unchanged": true,
+      "sha256": "8240debdfd33f236b499a32a5dedb7582a4d8985fd18ea645208db9c7f11f052"
     }
   },
-  "scope": {
-    "distinctChecksPassed": 164,
-    "distinctChecksTotal": 164,
-    "gpuFrameTime": null,
-    "deviceFPS": null,
-    "iphonePhysicalTest": false,
-    "render3DValidated": false,
-    "notes": [
-      "105 comprobaciones de física/combate ejecutadas tanto en Node como en Chrome; 54 de HUD en Chrome y 5 de caché en Node VM.",
-      "Los perfiles 844×390 y 390×844 son dimensiones CSS de iframes; no emulación de iPhone.",
-      "Las mediciones CPU no incluyen GPU, DOM ni audio y no se convierten a FPS de un teléfono.",
-      "El navegador de pruebas no dispone de WebGL. Los modelos, proyecciones y rayos se verificaron matemáticamente; no se afirma una revisión visual completa de la escena."
-    ]
+  "visualReview": {
+    "scope": "Capas CSS reales de curación azul/verde y muerte sobre fondo neutro claro; no es render 3D",
+    "blueHealing": "Visible, centro libre",
+    "greenHealing": "Visible, centro libre",
+    "death": "Título rojo, cuenta blanca sin panel, blur limitado al fondo; controles nítidos"
+  },
+  "distinctChecks": 206,
+  "graphicsFPS": null,
+  "limitations": [
+    "Entorno sin WebGL: no se ejecutó una partida renderizada ni se midieron FPS gráficos.",
+    "Pruebas DOM con eventos sintéticos y tamaños CSS; no emulación de Safari ni iPhone físico.",
+    "Offline probado con Cache/Fetch simulados, no ciclo Service Worker en Safari.",
+    "No se garantiza coste gráfico cero del desenfoque de muerte."
+  ],
+  "packageStructure": {
+    "files": 41,
+    "flat": true,
+    "localReferences": 34,
+    "allReferencesExist": true,
+    "noDevelopmentPaths": true,
+    "threeLicenseIncluded": true
+  },
+  "syntax": {
+    "javascriptFiles": 33,
+    "allSyntaxValid": true
   }
 }
