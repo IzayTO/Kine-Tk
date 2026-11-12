@@ -19,7 +19,7 @@ export class Supplies{
   return best;
  }
  hold(a,id,dt,held){const c=this.match.crates[id];if(!held||!this.match.running||this.match.ended||!c?.available||!this.reachable(a,c)){a.opening=null;return false;}if(a.consuming)return false;if(a.opening?.id!==id)a.opening={id,progress:0};a.opening.progress+=dt/OPEN_SECONDS;if(a.opening.progress+1e-8>=1){this.open(c,a);a.opening=null;return true;}return false;}
- open(c,a){if(!c.available)return false;const m=this.match;c.available=false;c.lid=1;c.ready=m.time+clamp(m.config.crateSeconds,20,90);c.openedAt=m.time;
+ open(c,a){if(!c.available)return false;const m=this.match;c.available=false;c.lid=1;c.ready=m.time+clamp(m.config.crateSeconds,15,60);c.openedAt=m.time;
   // Fixed positions over the valid crate footprint: no loot behind walls or on another floor.
   const amounts=[c.rifle,c.shotgun,c.id%2===0?3:0,c.id%2===1?3:0];
   for(let i=0;i<4;i++){const d=this.drops[c.id*4+i];d.amount=amounts[i];d.active=d.amount>0;d.born=m.time;d.flyStart=-100;d.collector=null;d.x=c.x+(i%2?1:-1)*.24;d.y=c.y+.52+(i>1?.3:0);d.z=c.z+(i>1?.18:-.18);}

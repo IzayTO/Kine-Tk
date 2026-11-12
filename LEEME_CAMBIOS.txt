@@ -1,0 +1,57 @@
+NODO 09 · CAMBIOS: SANGRE, NOCHE Y PARTIDAS
+
+INSTALACIÓN
+Sube todos los archivos de este ZIP a la raíz de KINEtiK, reemplazando los que
+tengan el mismo nombre. No borres los demás archivos del repositorio: este ZIP
+es un parche, no el juego completo. No requiere compilación.
+
+Se comparó con los archivos publicados en GitHub. También incluye las
+dependencias de las mejoras recientes entregadas que todavía no estaban en
+ese repositorio. No vuelve a incluir Three.js ni el controlador físico.
+Si Safari conserva la versión anterior después de publicar, cierra las
+pestañas del juego y vuelve a abrirlo para activar la nueva caché local.
+
+NOVEDADES
+- Sangre: daño a la vida, nunca al escudo. Un impacto deja una mancha; los
+  heridos vivos dejan rastros irregulares al desplazarse. Desde 99 de vida,
+  con más frecuencia y tamaño al bajar la vida. Ocho siluetas, sin gotas
+  animadas. Se adapta al suelo y las rampas. Deja de generar rastros al
+  morir o recuperar 100 de vida. Las manchas existentes duran 7 segundos
+  y se desvanecen durante los siguientes 3.
+- Dificultades: Recluta, Fácil, Normal, Difícil, Veterano, Experto y Élite.
+  Cambian reacción, error de puntería, decisiones y movilidad táctica.
+  Comparten las reglas de visión, daño y física; no ven a través de muros.
+- Todos contra todos: todos los bots y sus nombres son rojos; TÚ es azul.
+  Los bots siguen siendo enemigos entre sí. Rojo vs. azul conserva equipos.
+- 45 nombres sin revelar personalidades: 40 gamertags y 5 variantes de
+  nombres personales. No se repiten dentro de una misma partida.
+- Noche estática: luna creciente grande, estrellas y 27 lámparas cálidas en
+  puntos arquitectónicos. Apagadas durante el día. No hay ciclo horario.
+- Regeneración de cajas: 15, 20, 25, 30, 35, 40, 45, 50, 55 y 60 segundos.
+  Se conserva también 36 segundos para las configuraciones anteriores.
+- Duración: nueva opción Sin límite. En todos contra todos y por equipos,
+  la partida termina al alcanzar el objetivo de bajas, sin límite de reloj.
+
+DÓNDE CAMBIARLO
+Ajustes → Partida → Ambiente / Dificultad / Duración / Regeneración de cajas.
+Pulsa Iniciar o Reiniciar para aplicar la configuración de la nueva partida.
+Las opciones se guardan en este navegador.
+
+CONSERVACIÓN Y COSTE
+physics.js, level.js, navigation.js, render.js, refinements.js y soldier.js
+permanecen idénticos a la última versión entregada. No cambia la velocidad,
+el salto, el deslizamiento, el FOV ni la arquitectura transitable.
+
+La iluminación del escenario nocturno se calcula una vez, sin mapas de
+sombras. Hay como máximo dos luces locales sin sombras para cuerpos móviles.
+Las manchas comparten un único lote de dibujo y un cupo fijo de 192. Si se
+llena, se omiten manchas nuevas hasta liberar espacio; las existentes
+conservan sus diez segundos. No hay partículas ni texturas grandes nuevas.
+
+VERIFICACIÓN DE ESTE PARCHE
+19 comprobaciones de lógica/datos aprobadas: daño de vida/escudo, rastros y
+desvanecimiento, capacidad fija, rampas/bordes, colores y combate FFA/TDM,
+nombres, dificultades, tiempo ilimitado, objetivos y recarga de cajas,
+geometría nocturna, luces apagadas de día y raycasts de marcadores.
+También se verificaron sintaxis, dependencias locales y nombres de HTML.
+No se ejecutó renderizado ni se midieron FPS para este cambio.

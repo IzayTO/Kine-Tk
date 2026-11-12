@@ -2,6 +2,8 @@
 import {Player,DEFAULTS,clamp,BODY} from './physics.js';
 import {Arsenal,damageFor} from './combat.js';
 import {Supplies} from './supplies.js';
+import {BloodTrail} from './blood.js';
+import {botNames} from './bot-roster.js';
 import {Navigation,obstruction,angleDelta,distance,randomStream} from './navigation.js';
 export const PROFILES=Object.freeze([
  {name:'Agresivo',range:12,advance:.85,flank:.48,slide:.75,retreat:.32},
@@ -10,15 +12,23 @@ export const PROFILES=Object.freeze([
  {name:'Defensivo',range:25,advance:.25,flank:.25,slide:.24,retreat:.76},
  {name:'Equilibrado',range:18,advance:.55,flank:.50,slide:.55,retreat:.5}
 ]);
-export const DIFFICULTY=Object.freeze({easy:{reaction:.68,error:.065,tactics:.5,turn:2.4},normal:{reaction:.38,error:.037,tactics:.8,turn:3.6},hard:{reaction:.23,error:.023,tactics:1.1,turn:4.4}});
-export const MATCH_DEFAULTS=Object.freeze({mode:'training',bots:4,difficulty:'normal',team:'blue',minutes:5,limit:30,quality:'adaptive',crateSeconds:36});
+export const DIFFICULTY=Object.freeze({
+ recruit:{reaction:.95,error:.09,tactics:.30,turn:1.9,mobility:.45},
+ easy:{reaction:.68,error:.065,tactics:.5,turn:2.4,mobility:.65},
+ normal:{reaction:.38,error:.037,tactics:.8,turn:3.6,mobility:1},
+ hard:{reaction:.23,error:.023,tactics:1.1,turn:4.4,mobility:1.15},
+ veteran:{reaction:.19,error:.018,tactics:1.25,turn:4.8,mobility:1.3},
+ expert:{reaction:.16,error:.014,tactics:1.4,turn:5.1,mobility:1.45},
+ elite:{reaction:.13,error:.011,tactics:1.55,turn:5.4,mobility:1.6}
+});
+export const MATCH_DEFAULTS=Object.freeze({mode:'training',bots:4,difficulty:'normal',team:'blue',minutes:5,limit:30,quality:'adaptive',crateSeconds:35,environment:'day'});
 const copyPos=p=>({x:p.x,y:p.y,z:p.z});
 const chest=a=>({x:a.body.x,y:a.body.y+Math.min(1.38,a.body.height*.78),z:a.body.z});
 const eye=a=>({x:a.body.x,y:a.body.y+a.body.height-.16,z:a.body.z});
 const direction=(yaw,pitch)=>({x:-Math.sin(yaw)*Math.cos(pitch),y:Math.sin(pitch),z:-Math.cos(yaw)*Math.cos(pitch)});
 function sphereDistance(o,d,c,r){const x=o.x-c.x,y=o.y-c.y,z=o.z-c.z,b=x*d.x+y*d.y+z*d.z,h=b*b-(x*x+y*y+z*z-r*r);if(h<0)return Infinity;const t=-b-Math.sqrt(h);return t>=0?t:(-b+Math.sqrt(h)>=0?0:Infinity);}
 export class Match{
- constructor(world,player,arsenal,params=DEFAULTS){this.world=world;this.params=params;this.nav=new Navigation(world);this.player={id:0,name:'TÚ',body:player,arsenal,team:'blue',human:true};this.actors=[this.player];this.bots=[];this.events=[];this.sounds=[];this.time=0;this.running=false;this.ended=false;this.config={...MATCH_DEFAULTS};this.rng=randomStream(91223);this.crates=[];this.routeBudget=0;this.metrics={decisions:0,los:0,shots:0,replans:0,jumps:0,slides:0};this.qualityScale=1;this.setupCrates();this.initialize(this.player);this.supplies=new Supplies(this);this.supplies.reset();}
+ constructor(world,player,arsenal,params=DEFAULTS){this.world=world;this.params=params;this.nav=new Navigation(world);this.player={id:0,name:'TÚ',body:player,arsenal,team:'blue',human:true};this.actors=[this.player];this.bots=[];this.events=[];this.sounds=[];this.time=0;this.running=false;this.ended=false;this.config={...MATCH_DEFAULTS};this.rng=randomStream(91223);this.crates=[];this.routeBudget=0;this.metrics={decisions:0,los:0,shots:0,replans:0,jumps:0,slides:0};this.qualityScale=1;this.setupCrates();this.initialize(this.player);this.supplies=new Supplies(this);this.supplies.reset();this.blood=new BloodTrail(world);}
  initialize(a){a.health=100;a.shield=100;a.alive=true;a.kills=0;a.deaths=0;a.spawnUntil=0;a.deadUntil=0;a.lastDamage=-100;a.hit=0;a.yaw=0;a.pitch=0;a.shotUntil=0;a.radarShot=null;}
  enemy(a,b){return a!==b&&(this.config.mode==='ffa'||a.team!==b.team);}
  visible(a,b,range=52,fov=true){if(!b.alive||!this.enemy(a,b)||this.time<b.spawnUntil)return false;const pa=eye(a),pb=chest(b),d=distance(pa,pb);if(d>range||Math.abs(pa.y-pb.y)>14)return false;const yaw=Math.atan2(-(pb.x-pa.x),-(pb.z-pa.z));if(fov&&Math.abs(angleDelta(a.yaw,yaw))>1.12)return false;this.metrics.los++;return obstruction(this.world.colliders,pa,pb)>.999;}
@@ -34,8 +44,10 @@ export class Match{
  }
  start(config={}){
   this.config={...MATCH_DEFAULTS,...config};this.config.bots=clamp(Math.round(this.config.bots),1,20);if(!DIFFICULTY[this.config.difficulty])this.config.difficulty='normal';if(!['training','ffa','tdm'].includes(this.config.mode))this.config.mode='training';
-  this.time=0;this.events.length=0;this.sounds.length=0;this.running=true;this.ended=false;this.score={red:0,blue:0};this.result=null;this.rng=randomStream(9021);this.actors=[this.player];this.bots=[];this.initialize(this.player);this.player.team=this.config.team==='red'?'red':'blue';
-  for(let i=0;i<this.config.bots;i++){const rng=randomStream(7723+i*1297),profile=PROFILES[i%5],b={id:i+1,name:profile.name+' '+String(i+1).padStart(2,'0'),profile,rng,body:new Player(this.world,{...this.params,autoSprint:false}),arsenal:new Arsenal(),human:false,team:this.config.mode==='training'?(this.player.team==='blue'?'red':'blue'):(i%2?this.player.team:(this.player.team==='blue'?'red':'blue')),traits:{reaction:.85+rng()*.3,range:.82+rng()*.36,aim:.8+rng()*.4,bias:rng()*6.28,bravery:.85+rng()*.3},input:{x:0,z:0,yaw:0,sprint:false,jump:false,slide:false,crouch:false},path:[],pathAt:0,goal:null,state:'EXPLORAR',aimYaw:0,aimPitch:0,yawRate:0,nextManeuver:0,strafeSign:rng()<.5?-1:1,stepDistance:0};this.initialize(b);this.bots.push(b);this.actors.push(b);}
+  this.config.environment=this.config.environment==='night'?'night':'day';this.config.minutes=Number.isFinite(+this.config.minutes)?clamp(+this.config.minutes,0,120):5;this.config.limit=Number.isFinite(+this.config.limit)?clamp(Math.round(+this.config.limit),1,500):30;this.config.crateSeconds=Number.isFinite(+this.config.crateSeconds)?clamp(+this.config.crateSeconds,15,60):35;
+  this.time=0;this.events.length=0;this.sounds.length=0;this.running=true;this.ended=false;this.score={red:0,blue:0};this.result=null;this.rng=randomStream(9021);this.actors=[this.player];this.bots=[];this.initialize(this.player);this.player.team=this.config.mode==='ffa'?'blue':this.config.team==='red'?'red':'blue';
+  const names=botNames(this.config.bots);this.blood.reset();
+  for(let i=0;i<this.config.bots;i++){const rng=randomStream(7723+i*1297),profile=PROFILES[i%5],b={id:i+1,name:names[i],profile,rng,body:new Player(this.world,{...this.params,autoSprint:false}),arsenal:new Arsenal(),human:false,team:this.config.mode==='ffa'?'red':this.config.mode==='training'?(this.player.team==='blue'?'red':'blue'):(i%2?this.player.team:(this.player.team==='blue'?'red':'blue')),traits:{reaction:.85+rng()*.3,range:.82+rng()*.36,aim:.8+rng()*.4,bias:rng()*6.28,bravery:.85+rng()*.3},input:{x:0,z:0,yaw:0,sprint:false,jump:false,slide:false,crouch:false},path:[],pathAt:0,goal:null,state:'EXPLORAR',aimYaw:0,aimPitch:0,yawRate:0,nextManeuver:0,strafeSign:rng()<.5?-1:1,stepDistance:0};this.initialize(b);this.bots.push(b);this.actors.push(b);}
   this.supplies.reset();for(const a of this.actors)this.spawn(a);for(const c of this.crates)this.stock(c);this.metrics={decisions:0,los:0,shots:0,replans:0,jumps:0,slides:0};
  }
  hear(source,radius,kind){const p=source.body;this.sounds.push({id:source.id,team:source.team,x:p.x,y:p.y,z:p.z,radius,kind,expires:this.time+.7,stamp:this.time});if(this.sounds.length>40)this.sounds.shift();}
@@ -46,9 +58,9 @@ export class Match{
   else{b.target=null;b.seenId=null;b.recognizedAt=Infinity;if(b.memory&&this.time>b.memory.expires)b.memory=null;}
   if(!b.target){for(let i=this.sounds.length-1;i>=0;i--){const s=this.sounds[i];if(s.id===b.id||s.expires<this.time||(this.config.mode!=='ffa'&&s.team===b.team)||s.stamp<=(b.lastHeard??-1))continue;const d=distance(p,s);if(d<s.radius){const error=2+d*.08,angle=b.rng()*6.28;b.memory={x:s.x+Math.cos(angle)*error,y:s.y,z:s.z+Math.sin(angle)*error,expires:this.time+3.5,id:null};b.lastHeard=s.stamp;break;}}}
   // Nearby allies can suggest a coarse last-seen sector, never reveal live hidden coordinates.
-  if(this.config.mode==='tdm'&&!b.memory&&this.config.difficulty!=='easy')for(const ally of this.bots){if(ally!==b&&ally.team===b.team&&ally.memory&&distance(p,ally.body)<12){b.memory={...ally.memory,x:ally.memory.x+1.5,z:ally.memory.z-1.5,expires:Math.min(ally.memory.expires,this.time+2)};break;}}
+  if(this.config.mode==='tdm'&&!b.memory&&diff.tactics>=.7)for(const ally of this.bots){if(ally!==b&&ally.team===b.team&&ally.memory&&distance(p,ally.body)<12){b.memory={...ally.memory,x:ally.memory.x+1.5,z:ally.memory.z-1.5,expires:Math.min(ally.memory.expires,this.time+2)};break;}}
   if(b.positionPlanUntil>this.time&&b.goal&&(distance(p,b.goal)>1.4||Math.abs(p.y-b.goal.y)>.5)&&b.health+b.shield>65)return;
-  if(this.time<b.nextTactic)return;b.nextTactic=this.time+.65+b.rng()*.55;
+  if(this.time<b.nextTactic)return;b.nextTactic=this.time+(.65+b.rng()*.55)*(diff.tactics<.5?1.35:diff.tactics>1.1?.85:1);
   if(b.arsenal.selected!==0&&b.arsenal.ammo<b.arsenal.weapon.capacity*.38&&!b.arsenal.reload&&(!b.target||distance(p,b.target.body)>15)){if(b.arsenal.requestReload())this.events.push({type:'reload',actor:b.id,position:copyPos(p)});}
   const ammo=b.arsenal.slots,low=ammo[1].reserve<35&&ammo[1].ammo<12;
   if(low){let supply=null,d=Infinity;for(const c of this.crates)if(c.available&&c.rifle&&distance(c,p)<d){d=distance(c,p);supply=c;}if(supply){b.state='REABASTECER';this.setGoal(b,supply);return;}}
@@ -81,7 +93,7 @@ export class Match{
    const fighting=!!b.target&&this.time>=b.recognizedAt;cmd.sprint=!cmd.crouch&&(!fighting||b.state==='RETIRARSE'||b.state==='FLANQUEAR'||b.state==='PRESIONAR');
    if(p.grounded&&this.time>b.nextManeuver){
     if(node.kind==='jump'&&distance(p,node)<6.5&&p.speed>6){cmd.jump=true;cmd.sprint=true;b.nextManeuver=this.time+1.4;this.metrics.jumps++;}
-    else if(p.speed>8&&((under&&distance(p,node)>1)||(b.state==='RETIRARSE'&&distance(p,b.goal)<7)||(b.state==='FLANQUEAR'&&b.profile.slide>.6&&b.rng()<.035))){cmd.slide=true;b.nextManeuver=this.time+4+b.rng()*3;this.metrics.slides++;}
+    else if(p.speed>8&&((under&&distance(p,node)>1)||(b.state==='RETIRARSE'&&distance(p,b.goal)<7)||(b.state==='FLANQUEAR'&&b.profile.slide>.6&&b.rng()<.035*DIFFICULTY[this.config.difficulty].mobility))){cmd.slide=true;b.nextManeuver=this.time+4+b.rng()*3;this.metrics.slides++;}
    }
    if(p.sliding&&!cmd.crouch&&b.profile.name==='Ágil'&&p.slideTime>.28&&p.slideTime<.31&&b.target&&this.world.clear(p.x,p.y+.8,p.z,BODY.stand)){cmd.jump=true;this.metrics.jumps++;}
    // Human-scale separation, applied to steering rather than teleported positions.
@@ -117,8 +129,8 @@ export class Match{
    }
    b.arsenal.step(dt,{fire:fire&&!b.consuming&&!b.opening},{busy:!!b.consuming||!!b.opening,speed:b.body.speed,grounded:b.body.grounded,aim:!!b.target},e=>this.weaponEvent(b,e));
   }
-  this.supplies.step(dt);
-  if(this.config.mode!=='training'&&(this.time>=this.config.minutes*60||(this.config.mode==='tdm'?Math.max(this.score.red,this.score.blue):Math.max(...this.actors.map(a=>a.kills)))>=this.config.limit))this.finish();
+  this.supplies.step(dt);this.blood.step(this.actors,this.time);
+  if(this.config.mode!=='training'&&((this.config.minutes>0&&this.time>=this.config.minutes*60)||(this.config.mode==='tdm'?Math.max(this.score.red,this.score.blue):Math.max(...this.actors.map(a=>a.kills)))>=this.config.limit))this.finish();
  }
  weaponEvent(a,event,origin=null,dir=null){if(!a.alive||!this.running||this.ended)return[];const d=dir||direction(a.human?a.yaw:a.gunYaw,a.pitch),base=chest(a),o=origin||(a.human?eye(a):{x:base.x+d.x*.85+Math.cos(a.gunYaw)*.15,y:base.y+d.y*.85,z:base.z+d.z*.85-Math.sin(a.gunYaw)*.15});const muzzleBlocked=!origin&&!a.human&&obstruction(this.world.colliders,base,o)<.999;const result=[];
   if(event.type==='shot'){a.spawnUntil=Math.min(a.spawnUntil,this.time);this.metrics.shots++;a.shotUntil=this.time+.1;a.radarShot={x:a.body.x,z:a.body.z,yaw:a.human?a.yaw:a.gunYaw,at:this.time,from:a.radarShot?Math.max(0,Math.min(1,(3.2-(this.time-a.radarShot.at))/1.4)):0};this.hear(a,event.weapon==='shotgun'?52:46,'shot');
@@ -135,7 +147,7 @@ export class Match{
   }return{actor,zone,distance:best,point:{x:o.x+d.x*best,y:o.y+d.y*best,z:o.z+d.z*best}};
  }
  meleeTarget(a){let selected=null,best=Infinity;const p=a.body,o=chest(a);for(const b of this.actors){if(!b.alive||!this.enemy(a,b)||this.time<b.spawnUntil)continue;const d=distance(p,b.body);if(d>2.7+1e-9||Math.abs(p.y-b.body.y)>.95)continue;const t=chest(b);if(obstruction(this.world.colliders,o,t)<.999)continue;const yaw=Math.atan2(-(t.x-o.x),-(t.z-o.z)),rank=d+Math.abs(angleDelta(a.yaw,yaw))*.6;if(rank<best){best=rank;selected=b;}}return selected;}
- damage(a,amount,source,weapon=source.arsenal.weapon.id){if(!a.alive||this.time<a.spawnUntil||!this.enemy(source,a))return null;const shield=Math.min(a.shield,amount);a.shield-=shield;a.health=Math.max(0,a.health-(amount-shield));a.hit=.25;a.lastDamage=this.time;this.events.push({type:shield?'shield-hit':'health-hit',actor:a.id,position:copyPos(a.body)});if(!a.human&&!a.target){a.memory={x:source.body.x+(a.rng()-.5)*4,y:source.body.y,z:source.body.z+(a.rng()-.5)*4,expires:this.time+3,id:null};}
+ damage(a,amount,source,weapon=source.arsenal.weapon.id){if(!a.alive||this.time<a.spawnUntil||!this.enemy(source,a))return null;const shield=Math.min(a.shield,amount),oldHealth=a.health;a.shield-=shield;a.health=Math.max(0,a.health-(amount-shield));if(weapon!=='knife')this.blood.wound(a,oldHealth-a.health,this.time);a.hit=.25;a.lastDamage=this.time;this.events.push({type:shield?'shield-hit':'health-hit',actor:a.id,position:copyPos(a.body)});if(!a.human&&!a.target){a.memory={x:source.body.x+(a.rng()-.5)*4,y:source.body.y,z:source.body.z+(a.rng()-.5)*4,expires:this.time+3,id:null};}
   const killed=a.health<=0;if(killed){a.alive=false;this.supplies.cancel(a);a.deaths++;a.deadUntil=this.time+3.2;a.deathTime=this.time;source.kills++;this.score[source.team]++;a.body.vx=a.body.vy=a.body.vz=0;this.events.push({type:'elimination',actor:a.id,killer:source.id,weapon,killerName:source.name,victimName:a.name,killerTeam:source.team,victimTeam:a.team,position:copyPos(a.body)});}
   return{target:a.id,damage:amount,killed};
  }

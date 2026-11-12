@@ -68,12 +68,13 @@
  <div class="match-form">
  <label>Modo<select id="match-mode"><option value="training">Entrenamiento</option><option value="ffa">Todos contra todos</option><option value="tdm">Rojo vs. azul</option></select></label>
  <label>Soldados <output id="bot-count-label">4</output><input id="match-bots" type="range" min="1" max="20" value="4"></label>
- <label>Dificultad<select id="match-difficulty"><option value="easy">Fácil</option><option value="normal" selected>Normal</option><option value="hard">Difícil</option></select></label>
+ <label>Dificultad<select id="match-difficulty"><option value="recruit">Recluta</option><option value="easy">Fácil</option><option value="normal" selected>Normal</option><option value="hard">Difícil</option><option value="veteran">Veterano</option><option value="expert">Experto</option><option value="elite">Élite</option></select></label>
  <label>Tu equipo<select id="match-team"><option value="blue">Azul</option><option value="red">Rojo</option></select></label>
- <label>Duración<select id="match-minutes"><option value="3">3 min</option><option value="5" selected>5 min</option><option value="10">10 min</option><option value="15">15 min</option></select></label>
+ <label>Duración<select id="match-minutes"><option value="3">3 min</option><option value="5" selected>5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="0">Sin límite</option></select></label>
  <label>Límite de eliminaciones<select id="match-limit"><option>15</option><option selected>30</option><option>50</option><option>100</option></select></label>
  <label>Calidad de IA<select id="match-quality"><option value="adaptive">Adaptativa</option><option value="high">Alta</option><option value="low">Ahorro de CPU</option></select></label>
- <label>Regeneración de cajas<select id="match-crateSeconds"><option value="30">30 s</option><option value="36" selected>36 s</option><option value="45">45 s</option><option value="60">60 s</option></select></label>
+ <label>Ambiente<select id="match-environment"><option value="day">Día</option><option value="night">Noche estrellada</option></select></label>
+ <label>Regeneración de cajas<select id="match-crateSeconds"><option value="15">15 s</option><option value="20">20 s</option><option value="25">25 s</option><option value="30">30 s</option><option value="35" selected>35 s</option><option value="36">36 s</option><option value="40">40 s</option><option value="45">45 s</option><option value="50">50 s</option><option value="55">55 s</option><option value="60">60 s</option></select></label>
  </div><p id="bot-warning" class="settings-note">4 bots · Perfiles y percepción activos.</p>
  <div class="match-actions"><button id="begin-match" class="primary">INICIAR PARTIDA ↗</button><button id="restart-match" class="secondary">Reiniciar</button><button id="return-menu" class="secondary">Volver al menú</button></div>
  <p class="settings-note">Entrenamiento no tiene límite de tiempo. Rojo vs. azul: daño aliado desactivado. Protección al reaparecer: 2.2 s. Reserva K-09: 360; S-07: 56.</p>
