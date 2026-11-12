@@ -17,7 +17,7 @@ export class Input {
       if(e.code==='KeyP'||e.code==='Tab'){e.preventDefault();onPause(true);return;}
       if(!this.active)return;
       if(e.code==='Home'&&!e.repeat)onReset();
-      const action={KeyR:'reload',KeyQ:'ping',KeyB:'mode',KeyH:'assist',Digit1:'slot0',Digit2:'slot1',Digit3:'slot2'}[e.code];if(action&&!e.repeat)this.actions.push(action);
+      const action={KeyR:'reload',KeyQ:'ping',KeyB:'mode',KeyH:'assist',KeyF:'autofire',Digit4:'bandage',Digit5:'mini',Digit1:'slot0',Digit2:'slot1',Digit3:'slot2'}[e.code];if(action&&!e.repeat)this.actions.push(action);
       if(e.code==='Space'&&!e.repeat)this.jumpQueued=true;
       if(['KeyC','ControlLeft','ControlRight'].includes(e.code)&&!e.repeat)this.slideQueued=true;
       this.keys.add(e.code);
@@ -49,7 +49,7 @@ export class Input {
       button.addEventListener('pointerdown',e=>{
         if(!this.active)return;e.preventDefault();e.stopPropagation();capture(button,e.pointerId);this.buttons.set(e.pointerId,action);
         button.classList.add('pressed');
-        if(['reload','ping','assist','mode','slot0','slot1','slot2'].includes(action))this.actions.push(action);
+        if(['reload','ping','assist','mode','autofire','bandage','mini','slot0','slot1','slot2'].includes(action))this.actions.push(action);
         if(action==='jump'){this.jumpQueued=true;this.crouchToggle=false;}
         if(action==='slide'){this.slideQueued=this.params.contextualSlide&&(this.speed||0)>=5.4;if(!this.params.contextualSlide || (this.speed||0)<5.4)this.crouchToggle=!this.crouchToggle;else this.crouchToggle=false;}
         if(action==='sprint'){this.sprintToggle=!this.sprintToggle;this.crouchToggle=false;button.classList.toggle('selected',this.sprintToggle);}
@@ -72,6 +72,7 @@ export class Input {
     const p=this.preferences,source=touch?'touch':'mouse',ads=this.aim||this.aimToggle?(p?.[source+'ADS']??0.7):1;
     const scale=(touch?0.0030:0.0018)*this.params.sensitivity*ads;
     let dyaw=-dx*scale*(p?.[source+'X']??1),dpitch=-dy*scale*(p?.[source+'Y']??1)*(p?.invertY?-1:1);
+    this.onLook?.(dyaw,dpitch);
     if(this.onAssist&&p?.assist&&(touch||p.assistMouse))[dyaw,dpitch]=this.onAssist(this.yaw,this.pitch,dyaw,dpitch);
     this.yaw+=dyaw;this.pitch=clamp(this.pitch+dpitch,-1.48,1.48);
     this.lookDX=dx;this.lookDY=dy;

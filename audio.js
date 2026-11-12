@@ -2,7 +2,7 @@
 const PRESETS={
  step:['steps',.085,190,.17,1],sprint:['steps',.09,130,.25,1],jump:['effects',.16,370,.14,2],land:['effects',.18,110,.36,2],slide:['effects',.38,850,.18,2],brake:['effects',.10,470,.12,1],
  rifle:['weapons',.17,1700,.37,4],shotgun:['weapons',.30,700,.62,5],pump:['weapons',.14,780,.24,3],reload:['weapons',.22,2100,.15,2],shell:['weapons',.12,2600,.17,2],loaded:['weapons',.14,1150,.25,3],switch:['weapons',.10,1200,.13,2],swing:['weapons',.20,1600,.19,3],
- hit:['effects',.08,2800,.19,4],'shield-hit':['effects',.20,3100,.28,5],'health-hit':['effects',.16,160,.32,5],elimination:['effects',.24,220,.26,4],spawn:['interface',.25,820,.20,5],crate:['effects',.23,430,.20,2],supply:['interface',.21,1200,.25,3],ping:['interface',.14,1500,.16,2],empty:['weapons',.07,2900,.12,2]
+ hit:['effects',.08,2800,.19,4],'shield-hit':['effects',.20,3100,.28,5],'health-hit':['effects',.16,160,.32,5],elimination:['effects',.24,220,.26,4],spawn:['interface',.25,820,.20,5],crate:['effects',.23,430,.20,2],supply:['interface',.21,1200,.25,3],healed:['interface',.24,1350,.18,3],ping:['interface',.14,1500,.16,2],empty:['weapons',.07,2900,.12,2]
 };
 export class AudioFX{
  constructor(params){this.params=params;this.preferences={};this.ctx=null;this.voices=[];this.listener={x:0,y:0,z:0,yaw:0};this.maxVoices=14;this.lastStep=0;this.pending=[];}

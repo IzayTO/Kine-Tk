@@ -24,8 +24,8 @@ export class Arsenal{
    if(!this.attack.hit&&this.time>=this.attack.start+.15){this.attack.hit=true;emit({type:'melee',weapon:'knife',combo:this.attack.combo});}
    if(this.time>=this.attack.start+this.attack.duration)this.attack=null;
   }
-  if(this.autoReload&&this.selected!==0&&this.ammo===0&&this.reserve>0&&!this.reload&&this.time>=this.switchUntil){if(this.requestReload())emit({type:'reload',weapon:this.weapon.id});}
-  if(this.time<this.switchUntil||this.reload||this.attack)return;
+  if(!context.busy&&this.autoReload&&this.selected!==0&&this.ammo===0&&this.reserve>0&&!this.reload&&this.time>=this.switchUntil){if(this.requestReload())emit({type:'reload',weapon:this.weapon.id});}
+  if(context.busy||this.time<this.switchUntil||this.reload||this.attack)return;
   const trigger=this.selected===1&&this.mode==='semi'?edge:edge||input.fire||this.selected===0&&this.queuedAttack;
   const slot=this.slots[this.selected];if(!trigger||this.time+1e-8<slot.ready)return;
   if(this.selected!==0&&slot.ammo===0){if(edge)emit({type:'empty'});return;}

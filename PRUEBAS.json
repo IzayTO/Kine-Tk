@@ -1,383 +1,589 @@
 {
-  "version": "NODO 09 V3",
-  "validationDate": "2026-11-11",
-  "sourceCommit": "dcb6488e4c3e0cb6d42fa08e0cbbf77cbea207c2",
-  "physics": {
-    "passed": 24,
-    "total": 24,
-    "results": [
-      {
-        "name": "A · Aceleración y sprint",
-        "passed": true,
-        "detail": "11.50 m/s"
-      },
-      {
-        "name": "A · Diagonal normalizada",
-        "passed": true,
-        "detail": "Diagonal = recta"
-      },
-      {
-        "name": "A · Frenado con inercia",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "B · Impulso y desaceleración del slide",
-        "passed": true,
-        "detail": "11.50 → 14.06 → 11.54 m/s"
-      },
-      {
-        "name": "C · Slide jump conserva impulso",
-        "passed": true,
-        "detail": "13.64 → 13.61 m/s"
-      },
-      {
-        "name": "D · Encadenamiento y velocidad acotada",
-        "passed": true,
-        "detail": "14 cadenas; 14.10 m/s"
-      },
-      {
-        "name": "E · Pared fina a velocidad elevada",
-        "passed": true,
-        "detail": "Pared de 6 cm; impacto desde 18 m/s, sin cruce"
-      },
-      {
-        "name": "E · Esquina y deslizamiento lateral",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "E · Escalones de 20 cm",
-        "passed": true,
-        "detail": "10 escalones; y=2.00 m"
-      },
-      {
-        "name": "E · Escalón excesivo bloquea",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "E · Rampa analítica, ascenso y descenso",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "E · Techo impide ponerse de pie",
-        "passed": true,
-        "detail": "Altura máxima bajo techo: 1.12 m"
-      },
-      {
-        "name": "E · Salto contra techo",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Salto · Coyote time",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Salto · Buffer antes de aterrizar",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Salto · Control aéreo sin quitar impulso longitudinal",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cámara · FOV horizontal 100°",
-        "passed": true,
-        "detail": "57.625° vertical a 19.5:9"
-      },
-      {
-        "name": "H · Física idéntica a 30 / 60 / 144 FPS",
-        "passed": true,
-        "detail": "480 pasos; posiciones coinciden a <0.0000001 m"
-      },
-      {
-        "name": "Mapa · Entrada, paso bajo y rampa central",
-        "passed": true,
-        "detail": "Paso 1.12 m → cubierta +3.20 m"
-      },
-      {
-        "name": "Mapa · Escalera del taller a pasarela",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Mapa · Rampa de terrazas y salto de plataforma",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Mapa · Cubierta del edificio de control",
-        "passed": true,
-        "detail": "+6.40 m"
-      },
-      {
-        "name": "Mapa · Interior de control de lado a lado",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Mapa · Vía rápida continua",
-        "passed": true,
-        "detail": "73.4 m recorridos"
-      }
-    ]
+  "build": "NODO 09 V3 · Combate y suministros",
+  "date": "2026-11-12",
+  "base": "V3 entregada el 11 de noviembre, conservada localmente; derivada de V2 real del repositorio IzayTO/KINEtiK",
+  "tests": {
+    "physics": {
+      "passed": 24,
+      "total": 24,
+      "results": [
+        {
+          "name": "A · Aceleración y sprint",
+          "passed": true,
+          "detail": "11.50 m/s"
+        },
+        {
+          "name": "A · Diagonal normalizada",
+          "passed": true,
+          "detail": "Diagonal = recta"
+        },
+        {
+          "name": "A · Frenado con inercia",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "B · Impulso y desaceleración del slide",
+          "passed": true,
+          "detail": "11.50 → 14.06 → 11.54 m/s"
+        },
+        {
+          "name": "C · Slide jump conserva impulso",
+          "passed": true,
+          "detail": "13.64 → 13.61 m/s"
+        },
+        {
+          "name": "D · Encadenamiento y velocidad acotada",
+          "passed": true,
+          "detail": "14 cadenas; 14.10 m/s"
+        },
+        {
+          "name": "E · Pared fina a velocidad elevada",
+          "passed": true,
+          "detail": "Pared de 6 cm; impacto desde 18 m/s, sin cruce"
+        },
+        {
+          "name": "E · Esquina y deslizamiento lateral",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "E · Escalones de 20 cm",
+          "passed": true,
+          "detail": "10 escalones; y=2.00 m"
+        },
+        {
+          "name": "E · Escalón excesivo bloquea",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "E · Rampa analítica, ascenso y descenso",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "E · Techo impide ponerse de pie",
+          "passed": true,
+          "detail": "Altura máxima bajo techo: 1.12 m"
+        },
+        {
+          "name": "E · Salto contra techo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Salto · Coyote time",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Salto · Buffer antes de aterrizar",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Salto · Control aéreo sin quitar impulso longitudinal",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cámara · FOV horizontal 100°",
+          "passed": true,
+          "detail": "57.625° vertical a 19.5:9"
+        },
+        {
+          "name": "H · Física idéntica a 30 / 60 / 144 FPS",
+          "passed": true,
+          "detail": "480 pasos; posiciones coinciden a <0.0000001 m"
+        },
+        {
+          "name": "Mapa · Entrada, paso bajo y rampa central",
+          "passed": true,
+          "detail": "Paso 1.12 m → cubierta +3.20 m"
+        },
+        {
+          "name": "Mapa · Escalera del taller a pasarela",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Mapa · Rampa de terrazas y salto de plataforma",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Mapa · Cubierta del edificio de control",
+          "passed": true,
+          "detail": "+6.40 m"
+        },
+        {
+          "name": "Mapa · Interior de control de lado a lado",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Mapa · Vía rápida continua",
+          "passed": true,
+          "detail": "73.4 m recorridos"
+        }
+      ]
+    },
+    "v3": {
+      "passed": 48,
+      "total": 48,
+      "results": [
+        {
+          "name": "K-09 · 40 + 360, exactamente 400 disparos",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "K-09 · Auto recarga OFF exige entrada manual",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "K-09 · Recarga parcial conserva munición",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "K-09 · Recarga durante sprint no se interrumpe",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Armas · Cadencia independiente de 30/60/144 Hz",
+          "passed": true,
+          "detail": "29 / 29 / 29"
+        },
+        {
+          "name": "K-09 · Modo semiautomático requiere otra pulsación",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "S-07 · Siete cartuchos y reserva finita",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "S-07 · Dos cadencias con el mismo cargador",
+          "passed": true,
+          "detail": "Corredera 4, táctico 6 disparos / 3 s"
+        },
+        {
+          "name": "S-07 · Inserción progresiva e interrupción válida",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Armas · Cambio conserva munición por ranura",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Distancia horizontal 1 m",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Distancia horizontal 2 m",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Distancia horizontal 2.5 m",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Distancia horizontal 2.7 m",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Distancia horizontal 2.8 m",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Distancia horizontal 3 m",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Piso distinto queda excluido",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Pared sólida bloquea el impacto",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Un objetivo y eliminación de un golpe",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Vida · Escudo primero, sobrante a vida",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Equipos · Daño aliado desactivado",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Percepción · FOV, reconocimiento y memoria limitada",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Percepción · No ve a través del taller",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Audición · Zona aproximada, sin objetivo adquirido",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Dificultades y cinco personalidades diferenciadas",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Reaparición · 20 posiciones válidas y protección",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Reaparición · Eliminar y recuperar vida/escudo/munición",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cajas · Una recogida, límite y regeneración",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Modos · FFA, equipos y final por puntuación",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bot · Paso bajo y rampa central",
+          "passed": true,
+          "detail": "Llegada a 3.20 m"
+        },
+        {
+          "name": "Bot · Escalera de taller",
+          "passed": true,
+          "detail": "Llegada a 3.20 m"
+        },
+        {
+          "name": "Bot · Rampa de terrazas",
+          "passed": true,
+          "detail": "Llegada a 3.20 m"
+        },
+        {
+          "name": "Bot · Cubierta de control",
+          "passed": true,
+          "detail": "Llegada a 6.40 m"
+        },
+        {
+          "name": "Bot · Salto enlazado",
+          "passed": true,
+          "detail": "Llegada a 2.40 m"
+        },
+        {
+          "name": "Bot · Giro continuo mantiene desplazamiento",
+          "passed": true,
+          "detail": "360 pasos de giro a >4 m/s"
+        },
+        {
+          "name": "Bots · Partida de 90 s con 20 soldados respeta colisiones",
+          "passed": true,
+          "detail": "{\"samples\":3225,\"violations\":0,\"maxY\":3.2,\"states\":[\"EXPLORAR\",\"INVESTIGAR\",\"FLANQUEAR\",\"COBERTURA\",\"PRESIONAR\",\"ALTURA\",\"DESPLAZAMIENTO\",\"RETIRARSE\"],\"decisions\":12024,\"los\":60766,\"shots\":1364,\"replans\":1073,\"jumps\":9,\"slides\":56}"
+        },
+        {
+          "name": "Escena · Articulaciones conectadas y dos lotes para todos",
+          "passed": true,
+          "detail": "236 piezas articuladas / 4 soldados"
+        },
+        {
+          "name": "Escena · ADS rifle sigue el eje óptico y S-07 sin geometría de mira",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Disparos · Arquitectura bloquea antes de un enemigo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bots · No dispara durante reconocimiento",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cuchillo · Radio circular en diagonal",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "S-07 · Bombeo emite un evento por disparo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Modelo · S-07 no contiene miras superiores",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Modelo · Hoja 3D hacia atrás y al lateral",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Modelo · Posturas bajas corresponden a la colisión",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Navegación · Posición elevada accesible con línea de visión",
+          "passed": true,
+          "detail": "1.4933333333333334 m"
+        },
+        {
+          "name": "Equipos · Un bot siempre pertenece al equipo rival",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "FFA · El límite cuenta bajas individuales, no colores",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
+    },
+    "combat": {
+      "passed": 33,
+      "total": 33,
+      "results": [
+        {
+          "name": "Asistencia · Rango ampliado persiste hasta 2×",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Asistencia · Acerca el eje suavemente mientras corriges",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Asistencia · Mayor intensidad produce corrección mayor",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Asistencia · No sigue sola sin movimiento manual reciente",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Asistencia · Desactivada y fuera de ADS no corrige",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Asistencia · Respeta la decisión manual de apartar la mira",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Asistencia · Intensidad independiente de 30/60/120 Hz",
+          "passed": true,
+          "detail": "0.001543471133028794 / 0.0012768143447345385 / 0.001163308600824287"
+        },
+        {
+          "name": "Asistencia · Objetivo actualizado y enemigo muerto descartado",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autodisparo · Solo ADS y enemigo en el rayo real",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autodisparo · Aliados, protegidos y paredes bloquean",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autodisparo · Corta al eliminar y no gasta otro cartucho",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Autodisparo · No usa cuchillo ni interrumpe consumibles",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cajas · Cercanía sola no abre ni entrega loot",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cajas · 3 m inclusive, distancia/floor y pared impiden abrir",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Cajas · Mantener, cancelar, completar y abrir instantáneamente",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Loot · Pack de 3, límite de reserva y sobrante en suelo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Loot · No se recoge al atravesar una pared",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Loot · Recupera munición sobrante cuando hay espacio",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Loot · Regeneración no acumula objetos y cierra la tapa",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Vendaje · +25 tras exactamente 3.5 s, no antes",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Mini · +25 tras 2 s, paquete de tres y tope 100",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Consumibles · Sin doble uso, sin uso al máximo, exige otro toque",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Consumibles · Cancelar y morir no consume ni cura después",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Consumibles · Inventario acotado y reinicio limpio",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bajas · 16 frases distintas y frecuencia uniforme sin repeticiones",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Bajas · Evento conserva arma, nombres y equipos",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Radar · Posición al disparar, no rastreo oculto continuo",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Radar · Sólido hasta 1.8 s, desvanecido hasta 3.2 s",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Viñeta · Daño se prolonga hasta un segundo tras último impacto",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Viñeta · Salud baja y crítica laten sin ocupar el centro",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Viñeta · Consumo diferencia verde/azul y termina con fade",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Mira física · Circular/cuadrada comparten el mismo eje ADS",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "Escena · Botín limitado a 4 lotes, caja abre sin interpolación",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
+    }
   },
-  "v3": {
-    "passed": 48,
-    "total": 48,
-    "results": [
-      {
-        "name": "K-09 · 40 + 360, exactamente 400 disparos",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "K-09 · Auto recarga OFF exige entrada manual",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "K-09 · Recarga parcial conserva munición",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "K-09 · Recarga durante sprint no se interrumpe",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Armas · Cadencia independiente de 30/60/144 Hz",
-        "passed": true,
-        "detail": "29 / 29 / 29"
-      },
-      {
-        "name": "K-09 · Modo semiautomático requiere otra pulsación",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "S-07 · Siete cartuchos y reserva finita",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "S-07 · Dos cadencias con el mismo cargador",
-        "passed": true,
-        "detail": "Corredera 4, táctico 6 disparos / 3 s"
-      },
-      {
-        "name": "S-07 · Inserción progresiva e interrupción válida",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Armas · Cambio conserva munición por ranura",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Distancia horizontal 1 m",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Distancia horizontal 2 m",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Distancia horizontal 2.5 m",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Distancia horizontal 2.7 m",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Distancia horizontal 2.8 m",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Distancia horizontal 3 m",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Piso distinto queda excluido",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Pared sólida bloquea el impacto",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Un objetivo y eliminación de un golpe",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Vida · Escudo primero, sobrante a vida",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Equipos · Daño aliado desactivado",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Percepción · FOV, reconocimiento y memoria limitada",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Percepción · No ve a través del taller",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Audición · Zona aproximada, sin objetivo adquirido",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Dificultades y cinco personalidades diferenciadas",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Reaparición · 20 posiciones válidas y protección",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Reaparición · Eliminar y recuperar vida/escudo/munición",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cajas · Una recogida, límite y regeneración",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Modos · FFA, equipos y final por puntuación",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Bot · Paso bajo y rampa central",
-        "passed": true,
-        "detail": "Llegada a 3.20 m"
-      },
-      {
-        "name": "Bot · Escalera de taller",
-        "passed": true,
-        "detail": "Llegada a 3.20 m"
-      },
-      {
-        "name": "Bot · Rampa de terrazas",
-        "passed": true,
-        "detail": "Llegada a 3.20 m"
-      },
-      {
-        "name": "Bot · Cubierta de control",
-        "passed": true,
-        "detail": "Llegada a 6.40 m"
-      },
-      {
-        "name": "Bot · Salto enlazado",
-        "passed": true,
-        "detail": "Llegada a 2.40 m"
-      },
-      {
-        "name": "Bot · Giro continuo mantiene desplazamiento",
-        "passed": true,
-        "detail": "360 pasos de giro a >4 m/s"
-      },
-      {
-        "name": "Bots · Partida de 90 s con 20 soldados respeta colisiones",
-        "passed": true,
-        "detail": "{\"samples\":3225,\"violations\":0,\"maxY\":3.2,\"states\":[\"EXPLORAR\",\"INVESTIGAR\",\"FLANQUEAR\",\"COBERTURA\",\"PRESIONAR\",\"ALTURA\",\"DESPLAZAMIENTO\",\"RETIRARSE\"],\"decisions\":12024,\"los\":60766,\"shots\":1364,\"replans\":1073,\"jumps\":9,\"slides\":56}"
-      },
-      {
-        "name": "Escena · Articulaciones conectadas y dos lotes para todos",
-        "passed": true,
-        "detail": "236 piezas articuladas / 4 soldados"
-      },
-      {
-        "name": "Escena · ADS rifle sigue el eje óptico y S-07 sin geometría de mira",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Disparos · Arquitectura bloquea antes de un enemigo",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Bots · No dispara durante reconocimiento",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Cuchillo · Radio circular en diagonal",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "S-07 · Bombeo emite un evento por disparo",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Modelo · S-07 no contiene miras superiores",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Modelo · Hoja 3D hacia atrás y al lateral",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Modelo · Posturas bajas corresponden a la colisión",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "Navegación · Posición elevada accesible con línea de visión",
-        "passed": true,
-        "detail": "1.4933333333333334 m"
-      },
-      {
-        "name": "Equipos · Un bot siempre pertenece al equipo rival",
-        "passed": true,
-        "detail": "OK"
-      },
-      {
-        "name": "FFA · El límite cuenta bajas individuales, no colores",
-        "passed": true,
-        "detail": "OK"
-      }
-    ]
+  "browserLogic": {
+    "passed": 105,
+    "total": 105,
+    "environment": "Chrome de escritorio, tests.html, código real sin renderizar 3D; mismos casos de lógica que Node, no contados dos veces"
   },
   "hud": {
-    "date": "2026-11-11",
-    "passed": 28,
-    "total": 28,
+    "measurements": {
+      "minimapMeanCPUms": 0.008000000000174623,
+      "canvasUpdates": 200,
+      "approxJSHeapBytes": 20345450,
+      "environment": "Chrome de escritorio del entorno; Canvas 2D real, sin GPU 3D y sin emulación móvil",
+      "responsive": [
+        {
+          "width": 844,
+          "height": 390,
+          "mode": "landscape"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "mode": "portrait"
+        }
+      ],
+      "scope": "DOM real en Chrome; eventos PointerEvent sintéticos y ciclo real del juego con reloj controlado para la integración; no Safari ni dispositivo emulado",
+      "combatResponsive": [
+        {
+          "width": 844,
+          "height": 390
+        },
+        {
+          "width": 390,
+          "height": 844
+        }
+      ]
+    },
+    "passed": 54,
+    "total": 54,
     "results": [
       {
         "name": "HUD · Abrir muestra controles reales y oculta menús",
@@ -518,28 +724,140 @@
         "name": "V3 UI 390×844 · Áreas seguras y perfiles",
         "passed": true,
         "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Nuevos controles en editor y reutilización DOM",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Tocar balas inicia recarga real",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Interruptor auto recarga no dispara otra recarga",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Botón autodisparo cambia y persiste",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Vendaje inicia lógica, barra y viñeta verde",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Un segundo toque no superpone consumos",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Editar congela consumo y no activa autodisparo",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Final de curación +25 con salida suave",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Miniescudo cambia a azul",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Interacción visible y tocable a menos de 3 m",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Anillo horario avanza mientras mantienes",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Soltar cancela apertura",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Caja completa se abre y el botón desaparece",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Botín actualiza reserva y aviso",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Iconos de botín son planos orientados a cámara",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Aliado tiene flecha que sigue cada frame",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · No dibuja flechas de enemigos sobre paredes",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Feed usa nombres de color y se puede cerrar",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Retícula cuadrada seleccionable y escopeta amplia",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate HUD · Los nodos no crecen al actualizar 120 cuadros",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate integrado · ADS autodispara y corta exactamente tras la baja",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate integrado · No continúa disparando al cadáver",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate UI 844×390 · Controles nuevos reciben el toque",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate UI 844×390 · Arrastre/guardado de consumibles",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate UI 390×844 · Controles nuevos reciben el toque",
+        "passed": true,
+        "detail": "OK"
+      },
+      {
+        "name": "Combate UI 390×844 · Arrastre/guardado de consumibles",
+        "passed": true,
+        "detail": "OK"
       }
-    ],
-    "measurements": {
-      "minimapMeanCPUms": 0.006000000000058208,
-      "canvasUpdates": 200,
-      "approxJSHeapBytes": 11863979,
-      "environment": "Chrome del entorno. Canvas 2D y DOM reales; eventos sintéticos. Sin renderizado 3D ni emulación móvil.",
-      "responsive": [
-        {
-          "width": 844,
-          "height": 390,
-          "mode": "landscape"
-        },
-        {
-          "width": 390,
-          "height": 844,
-          "mode": "portrait"
-        }
-      ]
-    }
+    ]
   },
-  "offlineLogic": {
+  "offline": {
     "environment": "Node VM ejecuta el sw.js real con Cache/Fetch simulados; no prueba del ciclo Service Worker de Safari",
     "passed": 5,
     "total": 5,
@@ -566,406 +884,243 @@
       }
     ]
   },
-  "additionalRegression": {
-    "name": "Cambio de arma tras recarga no conserva desplazamiento de mano ajeno",
-    "passed": true,
-    "environment": "Node + matrices Three.js reales"
-  },
-  "chromeLogicRepeat": {
-    "passed": 72,
-    "total": 72,
-    "scope": "Mismas 24+48 comprobaciones; no se suman otra vez al total",
-    "bot90Seconds": {
-      "samples": 3206,
-      "violations": 0,
-      "maxY": 4.32,
-      "shots": 1375,
-      "jumps": 10,
-      "slides": 57
-    }
-  },
-  "measurements": {
-    "sourceCommit": "dcb6488e4c3e0cb6d42fa08e0cbbf77cbea207c2",
-    "environment": {
-      "node": "v24.22.1",
-      "platform": "linux",
-      "arch": "x64",
-      "scope": "CPU en contenedor. Pasos físicos 120 Hz y actualización visual 60 Hz simulados; no hay GPU, audio ni DOM en este benchmark; NO SON FPS."
-    },
+  "performance": {
+    "environment": "Node CPU; 120 Hz física/IA, 60 Hz animación simulados, 20 s por escenario, 3 s calentamiento. Sin GPU, DOM ni audio. No son FPS.",
     "unchanged": {
-      "physics.js": {
-        "same": true,
-        "sha256": "c6c78049f1a7113129c9260e66b332f0f89bed85f0a42e8e578dd01057df3d6a"
-      },
-      "level.js": {
-        "same": true,
-        "sha256": "1e67120af549f7c1b61549b3625daa3919129b4367fa48ce5439eb4310df38bd"
-      },
-      "render.js": {
-        "same": true,
-        "sha256": "86d5c61579f25913654aa2fa836fe6f5171ddc8a88e3040b137cf5ae4b79ca62"
-      },
-      "refinements.js": {
-        "same": true,
-        "sha256": "c370c8c62dfa95fa4571bfeaf95a04b10f7e5b056f9921b98f976d7a800e23b9"
-      },
-      "input.js": {
-        "same": true,
-        "sha256": "454039c8874289e62132978b999747494ddf0c7d81fae4c779cbf8426f329e77"
-      }
+      "physics.js": true,
+      "level.js": true,
+      "render.js": true,
+      "refinements.js": true,
+      "navigation.js": true,
+      "soldier.js": true
     },
-    "exactPlayerTrajectorySteps": 12000,
-    "parameters": {
-      "walkSpeed": 4.2,
-      "runSpeed": 7.4,
-      "sprintSpeed": 11.5,
-      "acceleration": 46,
-      "friction": 8,
-      "jumpSpeed": 8.6,
-      "gravity": 24,
-      "slideBoost": 2.6,
-      "slideDuration": 1.25,
-      "slideDrag": 4.2,
-      "airControl": 0.34,
-      "sensitivity": 1,
-      "hFov": 100,
-      "cameraMotion": 0.65,
-      "recoil": 0.65,
-      "resolution": 1,
-      "autoResolution": true,
-      "autoSprint": false,
-      "contextualSlide": true,
-      "sound": true
-    },
-    "baselineV2": {
-      "scene": {
-        "objects": 102,
-        "meshBatches": 68,
-        "visibleBatchesNotDrawCalls": 35,
-        "allAllocatedTriangles": 5946,
-        "uniqueGeometryBytes": 120092,
-        "instanceBytes": 21984,
-        "materials": 45,
-        "articulatedObjectsOffScene": 0
-      },
-      "animationCPUms": {
-        "mean": 0.014205670512820909,
-        "p95": 0.028492999999997437,
-        "max": 0.24094299999998725
-      }
-    },
-    "samples": [
+    "results": [
       {
         "bots": 1,
-        "simulatedSeconds": 35,
-        "sampledSeconds": 30,
-        "frames": 1800,
-        "initMS": 385.37356300000005,
-        "physicsPlusAICPUms": {
-          "mean": 0.022156428333336305,
-          "p95": 0.07717600000000857,
-          "max": 0.9129670000000942
-        },
-        "animationCPUms": {
-          "mean": 0.02914783499999803,
-          "p95": 0.04784199999994598,
-          "max": 0.4660430000000133
-        },
-        "combinedCPUms": {
-          "mean": 0.051304263333334335,
-          "p95": 0.11950999999999112,
-          "max": 0.9525660000000471
-        },
-        "scene": {
-          "objects": 119,
-          "meshBatches": 69,
-          "visibleBatchesNotDrawCalls": 37,
-          "allAllocatedTriangles": 7888,
-          "uniqueGeometryBytes": 138476,
-          "instanceBytes": 25252,
-          "materials": 60,
-          "articulatedObjectsOffScene": 85
-        },
-        "metrics": {
-          "decisions": 137,
-          "los": 0,
-          "shots": 0,
-          "replans": 3,
-          "jumps": 0,
-          "slides": 0
-        },
-        "eventPeak": 2,
-        "heapUsedBytesApprox": 28042608
+        "versions": [
+          {
+            "build": "V3 anterior",
+            "simulation": {
+              "mean": 0.030384334313726294,
+              "p95": 0.08374599999990551
+            },
+            "visual": {
+              "mean": 0.031146328431371145,
+              "p95": 0.0727399999999534
+            },
+            "lootBatches": 0,
+            "lootQuads": 0
+          },
+          {
+            "build": "actualización",
+            "simulation": {
+              "mean": 0.029762693137256206,
+              "p95": 0.07375100000001567
+            },
+            "visual": {
+              "mean": 0.03207321862745135,
+              "p95": 0.059799999999995634
+            },
+            "lootBatches": 4,
+            "lootQuads": 18
+          }
+        ]
       },
       {
         "bots": 4,
-        "simulatedSeconds": 35,
-        "sampledSeconds": 30,
-        "frames": 1800,
-        "initMS": 274.237924,
-        "physicsPlusAICPUms": {
-          "mean": 0.05980208444444593,
-          "p95": 0.1734519999999975,
-          "max": 1.2182359999999335
-        },
-        "animationCPUms": {
-          "mean": 0.06304829111110924,
-          "p95": 0.1102769999999964,
-          "max": 0.3731319999999414
-        },
-        "combinedCPUms": {
-          "mean": 0.12285037555555517,
-          "p95": 0.2640480000000025,
-          "max": 1.324877000000015
-        },
-        "scene": {
-          "objects": 119,
-          "meshBatches": 69,
-          "visibleBatchesNotDrawCalls": 37,
-          "allAllocatedTriangles": 12652,
-          "uniqueGeometryBytes": 138476,
-          "instanceBytes": 38704,
-          "materials": 60,
-          "articulatedObjectsOffScene": 340
-        },
-        "metrics": {
-          "decisions": 775,
-          "los": 291,
-          "shots": 0,
-          "replans": 47,
-          "jumps": 0,
-          "slides": 1
-        },
-        "eventPeak": 5,
-        "heapUsedBytesApprox": 31893112
+        "versions": [
+          {
+            "build": "V3 anterior",
+            "simulation": {
+              "mean": 0.14059254411764888,
+              "p95": 0.5645220000001245
+            },
+            "visual": {
+              "mean": 0.09291928333333384,
+              "p95": 0.1790800000001127
+            },
+            "lootBatches": 0,
+            "lootQuads": 0
+          },
+          {
+            "build": "actualización",
+            "simulation": {
+              "mean": 0.09109131764705401,
+              "p95": 0.2261919999998554
+            },
+            "visual": {
+              "mean": 0.0854119441176446,
+              "p95": 0.1418029999999817
+            },
+            "lootBatches": 4,
+            "lootQuads": 19
+          }
+        ]
       },
       {
         "bots": 8,
-        "simulatedSeconds": 35,
-        "sampledSeconds": 30,
-        "frames": 1800,
-        "initMS": 264.2120540000001,
-        "physicsPlusAICPUms": {
-          "mean": 0.15003633722222767,
-          "p95": 0.37944199999992634,
-          "max": 2.311153000000104
-        },
-        "animationCPUms": {
-          "mean": 0.15065250111110534,
-          "p95": 0.2768579999999474,
-          "max": 3.1806340000000546
-        },
-        "combinedCPUms": {
-          "mean": 0.30068883833333304,
-          "p95": 0.5883570000000873,
-          "max": 3.700417000000016
-        },
-        "scene": {
-          "objects": 119,
-          "meshBatches": 69,
-          "visibleBatchesNotDrawCalls": 37,
-          "allAllocatedTriangles": 19004,
-          "uniqueGeometryBytes": 138476,
-          "instanceBytes": 56640,
-          "materials": 60,
-          "articulatedObjectsOffScene": 680
-        },
-        "metrics": {
-          "decisions": 1997,
-          "los": 8954,
-          "shots": 228,
-          "replans": 232,
-          "jumps": 1,
-          "slides": 12
-        },
-        "eventPeak": 12,
-        "heapUsedBytesApprox": 70352720
+        "versions": [
+          {
+            "build": "V3 anterior",
+            "simulation": {
+              "mean": 0.16543347745097542,
+              "p95": 0.4240500000000793
+            },
+            "visual": {
+              "mean": 0.14245745098039117,
+              "p95": 0.26274599999987913
+            },
+            "lootBatches": 0,
+            "lootQuads": 0
+          },
+          {
+            "build": "actualización",
+            "simulation": {
+              "mean": 0.19365025098039032,
+              "p95": 0.4567090000000462
+            },
+            "visual": {
+              "mean": 0.15762538039215293,
+              "p95": 0.27328299999999217
+            },
+            "lootBatches": 4,
+            "lootQuads": 18
+          }
+        ]
       },
       {
         "bots": 12,
-        "simulatedSeconds": 35,
-        "sampledSeconds": 30,
-        "frames": 1800,
-        "initMS": 292.2246379999997,
-        "physicsPlusAICPUms": {
-          "mean": 0.2197751011111043,
-          "p95": 0.5130529999996725,
-          "max": 2.8366660000001502
-        },
-        "animationCPUms": {
-          "mean": 0.17664916444444342,
-          "p95": 0.26318700000001627,
-          "max": 1.2488119999998162
-        },
-        "combinedCPUms": {
-          "mean": 0.3964242655555477,
-          "p95": 0.7262740000001031,
-          "max": 3.0379189999998744
-        },
-        "scene": {
-          "objects": 119,
-          "meshBatches": 69,
-          "visibleBatchesNotDrawCalls": 38,
-          "allAllocatedTriangles": 25356,
-          "uniqueGeometryBytes": 138476,
-          "instanceBytes": 74576,
-          "materials": 60,
-          "articulatedObjectsOffScene": 1020
-        },
-        "metrics": {
-          "decisions": 2874,
-          "los": 13035,
-          "shots": 360,
-          "replans": 312,
-          "jumps": 2,
-          "slides": 9
-        },
-        "eventPeak": 14,
-        "heapUsedBytesApprox": 67906576
+        "versions": [
+          {
+            "build": "V3 anterior",
+            "simulation": {
+              "mean": 0.2818538882353069,
+              "p95": 0.6812279999999191
+            },
+            "visual": {
+              "mean": 0.2011255117646946,
+              "p95": 0.3129719999997178
+            },
+            "lootBatches": 0,
+            "lootQuads": 0
+          },
+          {
+            "build": "actualización",
+            "simulation": {
+              "mean": 0.2651874274509755,
+              "p95": 0.5677370000003066
+            },
+            "visual": {
+              "mean": 0.2046484499999973,
+              "p95": 0.32361799999944196
+            },
+            "lootBatches": 4,
+            "lootQuads": 14
+          }
+        ]
       },
       {
         "bots": 16,
-        "simulatedSeconds": 35,
-        "sampledSeconds": 30,
-        "frames": 1800,
-        "initMS": 266.6586360000001,
-        "physicsPlusAICPUms": {
-          "mean": 0.2578988361111096,
-          "p95": 0.6122629999999845,
-          "max": 1.544318000000203
-        },
-        "animationCPUms": {
-          "mean": 0.22317952944443784,
-          "p95": 0.31756899999982124,
-          "max": 0.6251620000002731
-        },
-        "combinedCPUms": {
-          "mean": 0.4810783655555474,
-          "p95": 0.8735870000000432,
-          "max": 1.8055810000000747
-        },
-        "scene": {
-          "objects": 119,
-          "meshBatches": 69,
-          "visibleBatchesNotDrawCalls": 39,
-          "allAllocatedTriangles": 31708,
-          "uniqueGeometryBytes": 138476,
-          "instanceBytes": 92512,
-          "materials": 60,
-          "articulatedObjectsOffScene": 1360
-        },
-        "metrics": {
-          "decisions": 3697,
-          "los": 16672,
-          "shots": 392,
-          "replans": 402,
-          "jumps": 2,
-          "slides": 16
-        },
-        "eventPeak": 17,
-        "heapUsedBytesApprox": 86319040
+        "versions": [
+          {
+            "build": "V3 anterior",
+            "simulation": {
+              "mean": 0.28092850098042066,
+              "p95": 0.6266050000003816
+            },
+            "visual": {
+              "mean": 0.2367774539215294,
+              "p95": 0.31693799999993644
+            },
+            "lootBatches": 0,
+            "lootQuads": 0
+          },
+          {
+            "build": "actualización",
+            "simulation": {
+              "mean": 0.32540179607843434,
+              "p95": 0.7143980000000738
+            },
+            "visual": {
+              "mean": 0.26876430686273073,
+              "p95": 0.37673799999993207
+            },
+            "lootBatches": 4,
+            "lootQuads": 17
+          }
+        ]
       },
       {
         "bots": 20,
-        "simulatedSeconds": 35,
-        "sampledSeconds": 30,
-        "frames": 1800,
-        "initMS": 257.7735049999992,
-        "physicsPlusAICPUms": {
-          "mean": 0.31346692722222136,
-          "p95": 0.6315650000005917,
-          "max": 7.695952999999463
-        },
-        "animationCPUms": {
-          "mean": 0.2854325333333302,
-          "p95": 0.38383000000067113,
-          "max": 3.5470409999998083
-        },
-        "combinedCPUms": {
-          "mean": 0.5988994605555515,
-          "p95": 0.9409420000001774,
-          "max": 8.264421999999286
-        },
-        "scene": {
-          "objects": 119,
-          "meshBatches": 69,
-          "visibleBatchesNotDrawCalls": 39,
-          "allAllocatedTriangles": 38060,
-          "uniqueGeometryBytes": 138476,
-          "instanceBytes": 110448,
-          "materials": 60,
-          "articulatedObjectsOffScene": 1700
-        },
-        "metrics": {
-          "decisions": 4661,
-          "los": 21241,
-          "shots": 459,
-          "replans": 414,
-          "jumps": 2,
-          "slides": 15
-        },
-        "eventPeak": 21,
-        "heapUsedBytesApprox": 82180360
+        "versions": [
+          {
+            "build": "V3 anterior",
+            "simulation": {
+              "mean": 0.3294147284313567,
+              "p95": 0.6762699999999313
+            },
+            "visual": {
+              "mean": 0.2928341127451083,
+              "p95": 0.39407499999924767
+            },
+            "lootBatches": 0,
+            "lootQuads": 0
+          },
+          {
+            "build": "actualización",
+            "simulation": {
+              "mean": 0.3706449568627428,
+              "p95": 0.7433209999999235
+            },
+            "visual": {
+              "mean": 0.3086355588235361,
+              "p95": 0.415407000000414
+            },
+            "lootBatches": 4,
+            "lootQuads": 15
+          }
+        ]
       }
-    ],
-    "renderFPS": null,
-    "renderFrameMS": null,
-    "actualDrawCalls": null,
-    "GPUMemory": null
+    ]
   },
-  "files": {
-    "modified": [
-      "INFORME.md",
-      "PRUEBAS.json",
-      "README.md",
-      "audio.js",
-      "combat.js",
-      "game.js",
-      "hud.js",
-      "index.html",
-      "preferences.js",
-      "settings-v2.js",
-      "style.css",
-      "tests.html",
-      "verify-scene.js",
-      "weapon-models.js",
-      "world-v2.js"
-    ],
-    "added": [
-      "match.js",
-      "navigation.js",
-      "soldier.js",
-      "sw.js",
-      "verify-hud-v3.js",
-      "verify-v3.js",
-      "world-v3.js"
-    ],
-    "unchanged": [
+  "preservation": {
+    "unchangedFiles": [
       "THREE-LICENSE.txt",
       "icon.svg",
-      "input.js",
       "level.js",
+      "navigation.js",
       "physics.js",
       "refinements.js",
       "render.js",
+      "soldier.js",
       "three.module.min.js",
+      "verify-hud-v3.js",
       "verify-hud.js",
-      "verify.js"
+      "verify-scene.js",
+      "verify.js",
+      "world-v2.js"
     ],
-    "removed": [
-      "verify-v2.js (pruebas antiguas de 30 cartuchos; sustituidas por verify-v3.js)"
-    ]
+    "sha256": {
+      "physics.js": "c6c78049f1a7113129c9260e66b332f0f89bed85f0a42e8e578dd01057df3d6a",
+      "level.js": "1e67120af549f7c1b61549b3625daa3919129b4367fa48ce5439eb4310df38bd",
+      "render.js": "86d5c61579f25913654aa2fa836fe6f5171ddc8a88e3040b137cf5ae4b79ca62",
+      "refinements.js": "c370c8c62dfa95fa4571bfeaf95a04b10f7e5b056f9921b98f976d7a800e23b9",
+      "navigation.js": "1d05522c894491888b323db4fb74784f8108fd3d31f92d462fb357e57c982921",
+      "soldier.js": "3b64134665cbd89942e025617d1869448ca6aa72f0c2df22927eb8d8f0989d88"
+    }
   },
-  "unverified": [
-    "Renderizado WebGL/GPU: creación del contexto no disponible en el navegador de pruebas",
-    "FPS gráficos y draw calls reales",
-    "Prueba física en iPhone/Safari, comodidad táctil y rendimiento térmico sostenido",
-    "Calidad auditiva y localización espacial escuchada en altavoces/auriculares",
-    "Ciclo de instalación, persistencia y expulsión de Service Worker en Safari"
-  ],
-  "notes": [
-    "Los eventos multitáctiles son sintéticos sobre los manejadores y DOM reales. Las dimensiones CSS no emulan un iPhone.",
-    "El benchmark de CPU excluye rasterización GPU, DOM y audio; no debe convertirse a FPS esperados.",
-    "Las cajas son activadores de recogida, no nuevos obstáculos sólidos del mapa."
-  ]
+  "scope": {
+    "distinctChecksPassed": 164,
+    "distinctChecksTotal": 164,
+    "gpuFrameTime": null,
+    "deviceFPS": null,
+    "iphonePhysicalTest": false,
+    "render3DValidated": false,
+    "notes": [
+      "105 comprobaciones de física/combate ejecutadas tanto en Node como en Chrome; 54 de HUD en Chrome y 5 de caché en Node VM.",
+      "Los perfiles 844×390 y 390×844 son dimensiones CSS de iframes; no emulación de iPhone.",
+      "Las mediciones CPU no incluyen GPU, DOM ni audio y no se convierten a FPS de un teléfono.",
+      "El navegador de pruebas no dispone de WebGL. Los modelos, proyecciones y rayos se verificaron matemáticamente; no se afirma una revisión visual completa de la escena."
+    ]
+  }
 }

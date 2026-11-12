@@ -9,9 +9,11 @@ export function buildModels(){
   // Both optical reference points are exactly on y=.14, x=0. The front post ends at that axis.
   const rear=new T.Object3D(),front=new T.Object3D();rear.position.set(0,.14,zRear);front.position.set(0,.14,zFront);g.add(rear,front);
   if(!physical)return{rear,front};
-  for(const x of [-.038,.038])box(g,.012,.065,.017,x,.14,zRear);
-  box(g,.086,.012,.017,0,.1785,zRear);box(g,.086,.012,.017,0,.1015,zRear);
-  box(g,.008,.047,.018,0,.1165,zFront,'accent');return{rear,front};
+  const square=new T.Group(),circle=new T.Group();g.add(square,circle);circle.visible=false;
+  const ring=new T.Mesh(new T.TorusGeometry(.043,.006,4,24),materials.dark);ring.position.set(0,.14,zRear);circle.add(ring);
+  for(const x of [-.038,.038])box(square,.012,.065,.017,x,.14,zRear);
+  box(square,.086,.012,.017,0,.1785,zRear);box(square,.086,.012,.017,0,.1015,zRear);
+  box(g,.008,.047,.018,0,.1165,zFront,'accent');return{rear,front,squareSight:square,circleSight:circle};
  };
  const flash=(g,z)=>{const f=new T.Mesh(new T.ConeGeometry(.065,.16,5),new T.MeshBasicMaterial({color:0xffdc99,transparent:true,opacity:.9,depthWrite:false}));f.rotation.x=-Math.PI/2;f.position.set(0,.02,z);f.visible=false;g.add(f);return f;};
  const rifle=new T.Group();
@@ -22,7 +24,7 @@ export function buildModels(){
  tube(rifle,.022,.31,0,.025,-.72);tube(rifle,.03,.06,0,.025,-.885,'dark');
  box(rifle,.132,.018,.14,0,.03,-.07,'accent');
  const mag=new T.Group();mag.position.set(0,-.13,-.13);rifle.add(mag);box(mag,.082,.19,.10,0,-.03,0,'steel').rotation.x=.08;for(const x of [-.043,.043])for(let i=0;i<3;i++)box(mag,.005,.10,.012,x,-.04,-.03+i*.026);
- const rf=flash(rifle,-.94),rs=sight(rifle,.035,-.74);batch(mag);batch(rifle,[mag,rf]);
+ const rf=flash(rifle,-.94),rs=sight(rifle,.035,-.74);batch(mag);batch(rifle,[mag,rf,rs.squareSight,rs.circleSight]);
  const shotgun=new T.Group();
  box(shotgun,.145,.15,.29,0,0,-.07,'steel');box(shotgun,.09,.15,.075,0,-.11,.04,'wood').rotation.x=-.3;
  box(shotgun,.075,.09,.18,0,-.015,.17,'wood').rotation.x=.12;box(shotgun,.13,.21,.065,0,-.045,.29,'wood');

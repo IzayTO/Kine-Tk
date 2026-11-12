@@ -1,98 +1,80 @@
-# NODO 09 · Informe V3
+# NODO 09 V3 · Combate y suministros
 
-Entrega: 11 de noviembre de 2026. Proyecto estático completo, sin multijugador ni servicios externos.
+Entrega del 12 de noviembre de 2026. Proyecto completo, estático y sin multijugador. Esta actualización parte de la V3 previamente entregada y que el usuario confirmó fluida. Esa V3 deriva del repositorio real https://github.com/IzayTO/KINEtiK, V2 con commit `dcb6488e4c3e0cb6d42fa08e0cbbf77cbea207c2`. No se publicó ni modificó el repositorio remoto.
 
-## Base conservada
+## Conservación
 
-Se partió de la V2 real de https://github.com/IzayTO/KINEtiK, commit `dcb6488e4c3e0cb6d42fa08e0cbbf77cbea207c2`. Los 26 archivos de esa base se contrastaron con los hashes Git del repositorio antes de modificarla. No se publicó ni se modificó el repositorio remoto.
+`physics.js`, `level.js`, `render.js`, `refinements.js`, `navigation.js`, `soldier.js` y `world-v2.js` mantienen exactamente sus bytes frente a la V3 entregada. No hubo cambios necesarios en el controlador del jugador ni en la distribución del mapa. Continúan el FOV horizontal de 100°, simulación a 120 Hz, sprint 11.5 m/s, carrera 7.4 m/s, salto 8.6 m/s, gravedad 24 m/s², aceleración 46 m/s² y todos los demás parámetros originales y personalizados. La entrada solo se amplió con nuevas acciones; no cambió su escala de sensibilidad.
 
-`physics.js`, `level.js`, `render.js`, `refinements.js` e `input.js` conservan sus bytes. No hubo cambios inevitables en el controlador: caminar 4.2 m/s, carrera 7.4, sprint 11.5, aceleración 46 m/s², fricción 8 s⁻¹, salto 8.6 m/s, gravedad 24 m/s², slide +2.6 m/s, duración 1.25 s, desaceleración 4.2 m/s², control aéreo 0.34 y FOV horizontal inicial 100°. Los ajustes personalizados previos siguen cargándose. Se compararon **12 000 pasos** de posiciones, velocidades, alturas y estados, con disparos/cambios de arma en paralelo: igualdad exacta frente a V2.
+Se conservan navegación, cinco personalidades, soldados Concepto 1 articulados, modos locales, protección de aparición, munición finita y las tres armas de V3. Los bots también pueden abrir cajas si necesitan recursos y consumir curación fuera de un enfrentamiento.
 
-Las seis zonas, pasarelas, rampas, escaleras, interiores, paleta y los 139 sólidos originales permanecen. La ubicación inicial ahora usa puntos de aparición seguros según equipo, lo que no cambia la física.
+## Apuntado, disparo y miras
 
-## Bots y navegación
+La intensidad admite 0–2× y la reducción de sensibilidad hasta 0.65. Los valores guardados se respetan. El seguimiento ADS corrige gradualmente hacia el pecho superior, con velocidad angular limitada, validación de distancia, equipo, protección y visibilidad. Solo continúa mientras hubo una corrección manual en los últimos 0.28 s; una corrección decidida para apartarse gana sobre la ayuda. No cambia fraudulentamente el impacto del disparo.
 
-`match.js` coordina combate, percepción, decisiones, munición, supervivencia y partidas. `navigation.js` deriva un grafo de varias alturas de los sólidos originales y ejecuta A*. Los recorridos usan el mismo `Player` cinemático del usuario: no se mueven atravesando geometría mediante animación. Hay anticipación de esquinas, aceleración de giro, separación local entre bots, detección de falta de progreso y cambio de ruta sin teletransportes durante navegación. Un enlace explícito permite el salto de terraza alta a plataforma inferior; rampas y escaleras usan conexiones caminables.
+Autodisparo independiente, apagado por defecto y persistente: arma de fuego, ADS completo, enemigo vivo bajo el rayo real, sin aliados delante ni paredes. Reconocimiento breve de 75 ms, cadencia del arma, bloqueo durante apertura/consumo/recarga/cambio. El daño se resuelve dentro del paso físico para detener el fuego inmediatamente tras una baja, incluso si hay varios pasos físicos en un cuadro.
 
-Cinco perfiles —**Agresivo, Táctico, Ágil, Defensivo y Equilibrado**— modifican distancia deseada, avance, flanqueo, retirada, selección de altura y movilidad. Variaciones individuales de reacción, ruta y puntería permanecen estables durante la partida. Fácil, Normal y Difícil cambian reacción, error, velocidad angular y probabilidad táctica; ninguno obtiene visión a través de paredes.
+Es una implementación propia inspirada en la experiencia solicitada; no se afirma reproducir el algoritmo interno de Fortnite. Las referencias públicas de Epic documentan los ajustes de disparo y asistencia, no su algoritmo: https://www.epicgames.com/help/c-34254770/c-33726977/a22407677 y https://www.epicgames.com/help/c-34254770/c-33726977/a13648291?lang=en-US.
 
-Visión limitada a unos 128° horizontales y 52 m, reconocimiento gradual, oclusión por sólidos y memoria visual de 5.5 s. La audición deja una zona aproximada durante 3.5 s; no adquiere automáticamente un enemigo. Los aliados próximos pueden compartir una última zona conocida. Las decisiones alternan exploración, investigación, presión, flanqueo, cobertura, retirada, posición elevada y reabastecimiento.
+La mira circular física de K-09 comparte anclajes y eje ADS con la cuadrada. La retícula de pantalla conserva sus diseños y agrega cuadrada. La escopeta tiene un cuadro de esquinas más amplio, que representa su dispersión cuando es dinámica; no se añadió mira física a S-07.
 
-Los bots apuntan gradualmente, limitan el giro del torso, disparan en ráfagas y aplican error según dificultad/movimiento. El rayo utiliza la orientación del arma; además se comprueba que su boca no haya pasado al otro lado de un muro. La geometría bloquea antes de aplicar daño. Pueden disparar desplazándose, retroceder, recargar, cambiar de arma y usar cuchillo. Los deslizamientos se vinculan a coberturas, flancos y pasos bajos; el perfil ágil puede enlazar slide jump.
+## Cajas, botín y consumibles
 
-## Soldado Concepto 1 y animación
+Interacción proyectada cada cuadro a 3 m, mismo piso y sin pared intermedia. Mantener un segundo completa un anillo horario. Apertura inmediata, sin interpolación de tapa. Ocho cajas existentes y un pool fijo de 32 entradas de botín, cuatro tipos: K-09, S-07, vendaje y mini. Cantidades de munición conservan las probabilidades de V3; las cajas alternan paquetes de tres vendajes o tres minis, garantizando disponibilidad de ambos en el mapa.
 
-Se construyó un único modelo procedural low-poly basado en la referencia: casco biselado, visor menta, traje gris verdoso, pechera y antebrazos claros, cinturón/bolsillos, botas angulares y detalles naranja. Solo los parches identificativos cambian a azul o rojo.
+Los objetos usan planos orientados a cámara en cada cuadro, con cuatro imágenes procedurales de 96×96 y dibujo sombreado para sugerir volumen. Recogida a 1.6 m, pausa visual inicial de 0.35 s y recorrido hacia el jugador de 0.32 s. Reservas reales: 360/56; sobrantes quedan disponibles. A tope se avisa sin recoger. Al regenerar la caja se renueva su botín sin acumular objetos. Los consumibles se limitan a nueve por tipo.
 
-Jerarquía de pelvis, abdomen, pecho, cuello, cabeza, hombros, codos, muñecas, manos, caderas, rodillas, tobillos y pies. Cada soldado usa 59 piezas, con dos geometrías compartidas. **Todos los soldados se dibujan mediante dos mallas instanciadas**, no una llamada por articulación. Los nodos articulares se calculan fuera del grafo de escena.
+Vendaje: +25 de vida tras 3.5 s; mini: +25 de escudo tras 2 s, ambos hasta 100. Cada uso necesita una pulsación nueva, no pueden superponerse y no gastan al máximo. La barra de progreso y viñeta verde/azul responden al reloj de simulación, con salida de 0.45 s. No hay animación de manos. Moverse sigue permitido; disparar, recargar, cambiar de arma o morir cancela sin gastar. La pausa/editor también pausa estos tiempos.
 
-Respiración, paso, carrera, sprint, avance lateral/retroceso, giro de torso separado, postura aérea, aterrizaje, agachado, slide, levantarse, apuntado, retroceso, recarga, cambio, tres cortes, reacción a impactos, caída de eliminación y reaparición. Los brazos utilizan IK de dos segmentos y las manos siguen el arma; las piernas usan ciclos según velocidad y dirección reales. Se revisaron proyecciones CPU del modelo y la altura de las posturas bajas.
+## Información y aspecto
 
-## Partidas y supervivencia
+- Viñeta roja interior transparente en el centro: cada impacto renueva un segundo; con menos de 50 de vida late a 0.4 Hz, y con 15 o menos a 0.85 Hz con más intensidad.
+- Tocar el indicador de balas inicia recarga; tocar AUTO RECARGA cambia únicamente ese interruptor.
+- Lista de hasta cuatro bajas, dos segundos visibles más 0.25 de salida, filas descartables al tocarlas. Nombres azules/rojos. Baraja de 16 frases evita repetición hasta agotar las elegibles; «apuñaló» y «escopeteó» solo aparecen con el arma correspondiente. Las cinco añadidas son «sacó de circulación a», «dejó fuera de combate a», «apagó el radar de», «ganó el duelo contra» y «cerró la partida de». La variedad depende de cuántas bajas y armas haya: no se garantiza ver el 70% en una partida breve.
+- Flechas blancas de compañeros sobre sus cabezas, visibles a través de paredes, escala según distancia y proyección cada cuadro. No muestran enemigos ni se usan en todos contra todos.
+- Radar: conserva la posición del último disparo, no la posición oculta actual. Dado que el pedido mencionaba 2.5 y 3.2 s de forma incompatible, se eligió presencia plena hasta 1.8 s y desvanecimiento hasta 3.2 s. Otro disparo renueva gradualmente el indicador. Se registra el mismo evento para todos los actores; la IA sigue usando su audición limitada, no recibe visión a través de paredes por el radar.
+- Sol con disco de radio 1.65 (antes 0.95) y halo 24 (antes 17). El disco se compone por encima del halo. Mismos materiales simples, textura de halo 64×64, sin luces adicionales, sombras nuevas ni postprocesamiento.
 
-Entrenamiento sin final por tiempo; todos contra todos por puntuación individual; Team Deathmatch rojo/azul por puntuación de equipo. Configuración de 1–20 bots, dificultad, equipo, duración, límite, calidad de IA e intervalo de cajas. Inicio, reinicio, regreso al menú y tabla final funcionan sobre el estado real de partida.
+Autodisparo, consumibles y lista de bajas son elementos del editor HUD. Se mantienen perfiles separados, guardado/cancelación/restauración y bloqueo de juego durante la edición. Caja, flechas y botín siguen la cámara por cuadro, independientemente de la frecuencia menor de los números del HUD.
 
-Jugador y bots tienen 100 de vida y 100 de escudo. El escudo absorbe primero; el sobrante pasa a vida. Sin regeneración automática añadida. Eliminación, puntuación y reaparición a los 3.2 s con 2.2 s de protección; atacar termina esa protección. Se puntúan posiciones de reaparición por espacio válido, distancia y exposición a enemigos. El daño aliado está desactivado.
+## Optimización y mediciones reales
 
-Ocho cajas en recorridos y emplazamientos seleccionados entregan cantidades limitadas de rifle, escopeta o ambas. No se gastan si el personaje ya está abastecido. Tapa animada, estado vacío y regeneración configurable; también las usan bots con necesidad de munición. Son activadores de recogida y no añaden obstáculos a las rutas originales.
+Sin nuevas dependencias. Cuatro lotes instanciados para botín, pool de 20 flechas y cuatro filas de bajas. Sin creación de nodos DOM por cuadro. Los soldados conservan los dos lotes instanciados de V3. Se preservan colisiones, frecuencia física, resolución adaptable y audio espacial con límite de voces. La cache offline incluye los cinco módulos nuevos.
 
-## Armas e interfaz
+Comparación de CPU en Node, en el mismo entorno, 20 segundos simulados por escenario con 3 de calentamiento. Física/IA a 120 Hz y animación a 60 Hz; la columna de simulación mide dos pasos por cuadro nominal. En la actualización se abrieron las ocho cajas para incluir botín activo y se evaluó asistencia. **No incluye GPU, DOM ni audio y no mide FPS de un dispositivo.** Una sola ejecución por caso, con ruido de temporización: las pequeñas bajadas no se presentan como mejoras de rendimiento.
 
-- **K-09:** rifle largo, 40 + 360 cartuchos reales. Auto/semi, recarga parcial que descuenta la reserva, auto recarga ON/OFF dentro del indicador. La recarga y sus desplazamientos de mano/cargador continúan durante sprint; se limpian offsets al cambiar de arma.
-- **S-07:** siete cartuchos, reserva 56, nueve perdigones y caída de daño por distancia. Modo corredera 0.82 s y táctico 0.48 s, con bombeo y sonidos adaptados. Inserción individual interrumpible. Sin geometría de mira superior.
-- **FILO:** hoja volumétrica de sección romboidal, barrida hacia atrás y al lateral exterior del antebrazo. Tres ataques alternados. Alcance horizontal circular **2.7 m inclusive**, diferencia vertical máxima 0.95 m, línea despejada, un solo objetivo por ataque y eliminación de un golpe. No aumenta la velocidad del jugador.
-- **HUD:** barra del editor plegable sin perder selección; capas táctiles corregidas para las tres ranuras en ambas orientaciones; círculo fino configurable; vida, escudo, puntuación y estado de partida editables por separado. Se mantienen retículas, minimapa, sensibilidades, asistencia y perfiles guardados V2.
-- **Marcador:** proyección de etiqueta en cada cuadro; cifras de distancia y resto del HUD a frecuencia menor. Un único elemento DOM reutilizado.
-- **Cielo:** azul con degradado por colores de vértice, sol pequeño y resplandor de 64 × 64; sin sombras ni luz dinámica nuevas. Se conserva la iluminación original y se ajusta el color de niebla al horizonte.
-
-## Audio
-
-Síntesis original con Web Audio: pasos/carrera/sprint, salto, aterrizaje, slide, frenada, rifle, escopeta, bombeo, recarga, cartucho, cambio, cuchillo, impacto, escudo/vida, eliminación, aparición, caja/recogida, ping y cargador vacío. Volúmenes independientes y ambiente discreto. Sonidos ajenos con paneo estéreo, atenuación por distancia, límite de alcance y máximo de 14 voces con prioridad. No hay archivos de audio externos ni licencias adicionales.
-
-## Pruebas ejecutadas
-
-**24/24** del controlador original, **48/48** nuevas de V3 y **28/28** de HUD: 100 comprobaciones distintas. Las 72 primeras se ejecutaron en Node y también en Chrome, sin contar la repetición como pruebas nuevas. El HUD utilizó elementos DOM y Canvas 2D reales con eventos sintéticos, incluidos varios identificadores de puntero y marcos CSS 844 × 390 / 390 × 844. No se trata de dispositivos emulados.
-
-Se verificaron cargadores/reservas finitos, cadencia, auto recarga, alimentación de escopeta, cuchillo a 1/2/2.5/2.7/2.8/3 m y diagonal, muros/pisos, escudo/vida, aliados, reacción/visión/memoria/audición, cajas, puntuaciones, reaparición, giro en marcha y rutas reales hasta las cubiertas a 3.2 y 6.4 m. Una sesión de 90 segundos simulados con 20 bots en Node produjo 3 225 muestras de posición sin penetraciones de sólidos, 1 364 disparos, 9 saltos y 56 slides; aparecieron ocho estados de comportamiento y posiciones en pasarelas a 3.2 m. La repetición en Chrome también pasó, con las cifras propias incluidas en JSON.
-
-Además: regresión específica de cambio de arma durante recarga, cinco comprobaciones del código de caché offline con Cache/Fetch simulados en Node, sintaxis de los módulos, dependencias locales e integridad del ZIP. El caché no se da por validado en Safari por estos tests.
-
-### Mediciones de CPU, no FPS gráficos
-
-35 segundos simulados por cantidad de bots; 5 de calentamiento y 30 medidos. Cada cuadro medido incluye dos pasos físicos de 1/120 s y una actualización de animación a 1/60 s. Node en contenedor, sin GPU, DOM ni audio dentro de este benchmark. Las cifras dependen del equipo y de la carga; **no predicen el rendimiento del iPhone**.
-
-| Bots | Física + IA, media ms | Animación, media ms | CPU combinada, P95 ms | Triángulos asignados* |
+| Bots | Simulación anterior ms | Simulación nueva ms | Animación anterior ms | Animación nueva ms |
 |---:|---:|---:|---:|---:|
-| 1 | 0.022 | 0.029 | 0.120 | 7,888 |
-| 4 | 0.060 | 0.063 | 0.264 | 12,652 |
-| 8 | 0.150 | 0.151 | 0.588 | 19,004 |
-| 12 | 0.220 | 0.177 | 0.726 | 25,356 |
-| 16 | 0.258 | 0.223 | 0.874 | 31,708 |
-| 20 | 0.313 | 0.285 | 0.941 | 38,060 |
+| 1 | 0.030 | 0.030 | 0.031 | 0.032 |
+| 4 | 0.141 | 0.091 | 0.093 | 0.085 |
+| 8 | 0.165 | 0.194 | 0.142 | 0.158 |
+| 12 | 0.282 | 0.265 | 0.201 | 0.205 |
+| 16 | 0.281 | 0.325 | 0.237 | 0.269 |
+| 20 | 0.329 | 0.371 | 0.293 | 0.309 |
 
-*Incluye armas inactivas y efectos reservados. No es el número de triángulos visibles de un cuadro GPU.*
+Con 20 bots, estas dos tareas CPU sumaron 0.622 ms antes y 0.679 ms después: diferencia de unos 0.057 ms en este entorno, no una estimación de coste gráfico ni de Safari. El minimapa base en Chrome promedió 0.008 ms para 200 actualizaciones; no incluye el coste global de la interfaz. La lectura aproximada de heap JavaScript al terminar la prueba HUD fue 20.35 MB; no representa toda la memoria del juego ni demuestra ausencia absoluta de fugas.
 
-La actualización visual CPU de V2, en su prueba sin bots, promedió 0.0142 ms. La escena base describe 5 946 triángulos y 68 mallas; V3 mantiene 69 mallas en el grafo para cualquiera de las cantidades probadas, con instancias adicionales dentro de ellas. Los lotes visibles **no son draw calls medidos**. Con 20 bots hay 1 700 nodos de articulación fuera de escena. Las geometrías y matrices de instancias suman aproximadamente 243.1 KiB de buffers CPU; no es memoria total ni memoria GPU.
+## Verificaciones ejecutadas
 
-El minimapa promedió 0.006 ms en 200 actualizaciones de Canvas 2D en Chrome. Su lectura de heap JS fue 11 863 979 bytes en esa sesión de diagnóstico; incluye la página y pruebas, excluye GPU y no constituye un límite del juego. El presupuesto de rutas es global (hasta 12 búsquedas/s); dirección a 20 Hz, percepción/decisiones escalonadas, física a 120 Hz y animación interpolada. Continúan el límite de densidad de píxeles y resolución adaptativa V2. Efectos en pools, minimapa limitado a 10 Hz, sin sombras dinámicas añadidas.
+- **24/24 física**: movimiento, rampas, escalones, colisiones, slide, slide jump, coyote/buffer y pasos temporales.
+- **48/48 V3**: armas, navegación, percepción, equipos, daño, bots, reapariciones, modelos y sistemas conservados. Incluye simulación de 20 bots durante 90 s con 3 225 comprobaciones de penetración y cero violaciones. El caso de caja se adaptó al nuevo contrato de mantener/abrir/recoger.
+- **33/33 nuevas**: ayuda real, límites/oclusiones/autodisparo, botín parcial y máximo, consumibles/timers, frases, radar, viñetas, eje de mira y lotes visuales.
+- Estos **105 casos pasaron en Node y en Chrome**; se cuentan una sola vez.
+- **54/54 HUD en Chrome**: DOM y Canvas 2D reales, eventos táctiles sintéticos, perfiles CSS 844×390 y 390×844, controles sin capas que los tapen, editor y persistencia. La integración ejecutó el ciclo real con reloj de diagnóstico controlado: ADS eliminó a un enemigo con un cartucho y no gastó otro después.
+- **5/5 offline en Node VM**: precarga de 27 recursos, navegación y módulo desde caché sin red, limpieza limitada al ámbito del juego y no interceptar otros orígenes. Es validación del código del worker con Cache/Fetch simulados, no del ciclo Service Worker de Safari.
 
-## Límites conocidos y validación pendiente
+Total: **164 verificaciones distintas aprobadas**. Resultados y mediciones detalladas en `PRUEBAS.json`. `tests.html` y el diagnóstico HUD permiten repetir los casos de lógica e interfaz.
 
-- El navegador de verificación no crea un contexto WebGL. Por eso **no se verificó una partida 3D renderizada**, ni FPS gráficos, tiempo GPU, draw calls reales o memoria gráfica. Se validaron lógica, colisiones, geometría/matrices y DOM. La vista normal del juego sigue siendo WebGL; el diagnóstico sin 3D está explícitamente separado.
-- Revisión visual completa, sensación táctil y rendimiento sostenido en Safari/iPhone quedan para la prueba de uso del dispositivo. No se intentó emularlo ni se prometen 60 FPS con 20 bots.
-- La IA es heurística: puede necesitar una nueva ruta en cruces concurridos. La separación entre soldados es local; no hay simulación de masas ni coordinación de escuadra compleja. No utiliza saltos arbitrarios entre cualquier techo: solo conexiones seguras y el enlace especial descrito.
-- Hitboxes de cabeza/torso/extremidades aproximadas y animaciones procedurales, sin ragdoll ni IK de pies sobre cada escalón. No se afirma coincidencia exacta entre cada extremidad animada y su volumen de daño. Los dedos son simplificados; la eliminación usa caída animada.
-- Audio implementado y conectado a eventos; calidad de escucha y percepción espacial en auriculares/altavoz quedan sin evaluación auditiva. El paneo es estéreo por dirección/distancia, sin HRTF ni reverberación acústica del edificio.
-- El almacenamiento local y el caché offline dependen del navegador. No se guardan partidas en curso; sí ajustes, distribuciones y configuración. Para futuras ediciones incrementa VERSION en `sw.js` para renovar el paquete almacenado.
+## Alcance de validación y límites
+
+El navegador de pruebas no dispuso de WebGL. Se probaron geometría, rayos, matrices y proyecciones, pero no se presenta el diagnóstico sin 3D como una partida renderizada. No se midieron FPS gráficos, coste GPU ni comodidad táctil en iPhone. La revisión visual final del tamaño del sol, las miras y el botín, y la fluidez real de Safari quedan como validación de uso; no se promete coste cero ni 60 FPS. No se intentó acceder a un iPhone físico.
+
+La inteligencia y animación de los bots siguen siendo la aproximación procedural de la V3; esta entrega no las reconstruye. El inventario es simple, se reinicia al reaparecer y no incorpora arrastrar/soltar objetos ni un sistema complejo de equipo. El botín sin recoger se renueva con su caja. No se añadieron servicios de pago, backend ni multijugador.
 
 ## Archivos
 
-Modificados: `INFORME.md`, `PRUEBAS.json`, `README.md`, `audio.js`, `combat.js`, `game.js`, `hud.js`, `index.html`, `preferences.js`, `settings-v2.js`, `style.css`, `tests.html`, `verify-scene.js`, `weapon-models.js`, `world-v2.js`.
+Añadidos: `aim-support.js`, `combat-feedback.js`, `combat-ui.js`, `loot-visuals.js`, `supplies.js`, `verify-combat-ui.js`, `verify-combat.js`.
 
-Nuevos: `match.js`, `navigation.js`, `soldier.js`, `sw.js`, `verify-hud-v3.js`, `verify-v3.js`, `world-v3.js`.
+Modificados frente a la V3 entregada: `INFORME.md`, `PRUEBAS.json`, `README.md`, `audio.js`, `combat.js`, `game.js`, `hud.js`, `index.html`, `input.js`, `match.js`, `preferences.js`, `settings-v2.js`, `style.css`, `sw.js`, `tests.html`, `verify-v3.js`, `weapon-models.js`, `world-v3.js`.
 
-Conservados byte por byte: `THREE-LICENSE.txt`, `icon.svg`, `input.js`, `level.js`, `physics.js`, `refinements.js`, `render.js`, `three.module.min.js`, `verify-hud.js`, `verify.js`.
-
-Retirados del paquete: `verify-v2.js (pruebas antiguas de 30 cartuchos; sustituidas por verify-v3.js)`.
-
-Los nombres `world-v2.js` y `settings-v2.js` se conservan por compatibilidad interna; forman parte de esta única V3. Todos los archivos del ZIP quedan en la raíz y las dependencias son locales. Three.js mantiene su licencia MIT en `THREE-LICENSE.txt`.
+La entrega contiene 39 archivos sueltos, incluidos código, dependencia local y licencia, instrucciones y verificaciones. No necesita carpetas, rutas de desarrollo ni compilación.
